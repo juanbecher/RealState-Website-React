@@ -1,0 +1,145 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+  /* line-height:1.5; */
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.contenedor{
+  max-width: 1400px;
+  width: 95%;
+  /* padding: 5rem 0; */
+  margin: 0 auto;
+}
+.contenedor-1000{
+  max-width: 1000px;
+  width: 95%;
+  /* padding: 5rem 0; */
+  margin: 0 auto;
+}
+
+.classPadding{
+  padding-top: 10rem;
+}
+
+.flex{
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.fondoHeader{
+  transition-duration: 0.3s;
+  background-color: white;
+}
+.fondoHeader a {
+  
+  color: black;
+}
+
+.link:hover{
+  cursor: pointer;
+}
+.active{
+  color:var(--rojo);
+  }
+
+
+
+.cont_select_center {
+  position: absolute;
+  left: 50%;
+  top:50%;
+  margin-top: -30px;
+  margin-left: -150px;
+}
+
+.cont_heg_50 {
+  position: absolute;
+  height: 50%;
+  left: 0;
+  top: 0;
+  width: 100%;
+background-color: #fd7b52;
+}
+
+
+
+/* Tamaño del scroll */
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+
+ /* Estilos barra (thumb) de scroll */
+.container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb:active {
+  background-color: #999999;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+ /* Estilos track de scroll */
+.container::-webkit-scrollbar-track {
+  background: #e1e1e1;
+  border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-track:hover, 
+.container::-webkit-scrollbar-track:active {
+  background: #d4d4d4;
+}
+
+
+.preloader {
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; */
+  margin: 20rem auto;
+  width: 50px;
+  height: 50px;
+  border: 10px solid #eee;
+  border-top: 10px solid #a63f5a;
+  border-radius: 50%;
+  animation-name: girar;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pswp img {
+  object-fit: contain;
+  max-width: none;
+}
+
+.marker{
+  color: red;
+  background-color: red;
+}
