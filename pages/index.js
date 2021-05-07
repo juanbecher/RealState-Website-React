@@ -6,7 +6,7 @@ import Layout from "../components/Layout/Layout";
 import PanelDestacado from "../components/PanelDestacado";
 import Button from "../components/Layout/Button";
 import { FirebaseContext } from "../firebase";
-import {cargaContext} from '../components/FiltroContext'
+// import {cargaContext} from '../components/FiltroContext'
 
 const ContenedorImagen = styled.div`
   /* padding-top:10rem; */

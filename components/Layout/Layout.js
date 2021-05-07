@@ -93,7 +93,9 @@ const Layout = (props) => {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
-        {/* <link rel="stylesheet" href="/static/globals.css"></link> */}
+        {/* <link rel="stylesheet" href="slick-carousel/slick/_slick.css"></link>
+        <link rel="stylesheet" href="slick-carousel/slick/_slick-theme.css"></link> */}
+
 
         {/* <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0-rU3vYLOIiSgtfbfVC_m4SqRigS9vyk&libraries=places"></script> */}
       </Head>
