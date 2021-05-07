@@ -1,5 +1,6 @@
 import { jsx } from "@emotion/react";
 import Head from "next/head";
+import {Html} from 'next/document';
 import React, { Children, Fragment } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -67,7 +68,7 @@ const Layout = (props) => {
       <Head>
         <title>ME - Inmobiliaria</title>
         <link rel="shortcut icon" type="image/jpg" href="/favicon-me.png" />
-        <html lang="es" />
+        {/* <html lang="es"/> */}
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
@@ -92,6 +93,7 @@ const Layout = (props) => {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
+        {/* <link rel="stylesheet" href="/static/globals.css"></link> */}
 
         {/* <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0-rU3vYLOIiSgtfbfVC_m4SqRigS9vyk&libraries=places"></script> */}
       </Head>

@@ -51,6 +51,7 @@ const Header = () => {
   // Agrega fondo blanco a header cuando scrolleamos 
   useEffect(() => {
     const pageHeader = document.querySelector(".page-header");
+    // const pageHeader = $(".page-header");
     //   const animatedUl = pageHeader.querySelector(".secondary-menu");
     const fondoHeader = "fondoHeader";
     let targetScroll = window.innerHeight - pageHeader.offsetHeight;
@@ -64,9 +65,11 @@ const Header = () => {
 
       if (scrollY > targetScroll || window.location.pathname != '/') {
         pageHeader.classList.add(fondoHeader);
+        // pageHeader.addClass(fondoHeader);
         setUrl_logo("/logo0605_negro2.png");
       } else {
         pageHeader.classList.remove(fondoHeader);
+        // pageHeader.removeClass(fondoHeader);
         setUrl_logo("/logo0605_blanco.png");
       }
     });
@@ -78,12 +81,14 @@ const Header = () => {
 
   // Agrega fondo blanco a header en paginas que no sean raiz /
   useEffect(() => {
-    const pageHeader = document.querySelector(".page-header");
+    // const pageHeader = document.querySelector(".page-header");
+    const pageHeader = $(".page-header");
     const fondoHeader = "fondoHeader";
     if(window.location.pathname != '/'){
-      // setUrl_logo("/logo2504_negro2.png");
       setUrl_logo("/logo0605_negro2.png");
-      pageHeader.classList.add(fondoHeader);
+      console.log("entro")
+      // pageHeader.classList.add(fondoHeader);
+      pageHeader.addClass(fondoHeader)
     }
     if(window.location.pathname == '/propiedades'){
       $(".page-header").css("box-shadow","none");

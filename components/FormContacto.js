@@ -103,7 +103,7 @@ const FormContacto = ({id,tipo,operacion}) => {
   const { nombre, email, telefono, descripcion } = valores;
     return ( 
         <Contacto>
-                <h4>Contáctenos</h4>
+                <h4>Contacto</h4>
                 <div
                   css={css`
                     display: flex;

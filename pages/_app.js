@@ -1,6 +1,8 @@
-import "../styles/globals.css";
+// import "../styles/globals.css";
+import '../public/static/globals.css';
 // import "../styles/bootstrap-theme.min.css";
 // import "../styles/bootstrap.min.css";
+
 import "slick-carousel/slick/_slick.css";
 import "slick-carousel/slick/_slick-theme.css";
 import firebase, { FirebaseContext } from "../firebase";

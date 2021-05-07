@@ -217,15 +217,15 @@ export default function Sucursales() {
                   <h2>Casa Central</h2>
                   <h3>Santa Rosa</h3>
                   <ul>
-                    <li>Ubicacion: Gral. Pico 502(Esquina Juan B. Justo)</li>
-                    <li>Telefono: 02954 59-6067</li>
+                    <li>Ubicación: Gral. Pico 502(Esquina Juan B. Justo)</li>
+                    <li>Teléfono: 02954 59-6067</li>
                     <li>Email: memiliobr@speedy.com.ar</li>
                     <li>Horarios: Lunes a Viernes de 09:00hs a 15:00hs</li>
                   </ul>
                 </div>
               </Contenedor>
               <Contacto>
-                <h4>Contáctenos</h4>
+                <h4>Contacto</h4>
                 <div
                   css={css`
                     display: flex;

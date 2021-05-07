@@ -1,6 +1,6 @@
 import React, { Fragment , useEffect, useState, useContext} from "react";
 import { jsx } from "@emotion/react";
-import styles from "../styles/Home.module.css";
+// import styles from "../styles/Home.module.css";
 import styled from "@emotion/styled";
 import Layout from "../components/Layout/Layout";
 import PanelDestacado from "../components/PanelDestacado";

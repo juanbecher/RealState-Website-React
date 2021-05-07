@@ -25,6 +25,12 @@ const Presentacion = styled.div`
     width: 280px;
     height: 280px;
 }
+h2{
+  margin-bottom: 1rem;
+}
+div{
+  margin: auto 0;
+}
 @media (min-width: 768px){
   .principal{
   display: grid;
@@ -40,6 +46,9 @@ const Valor = styled.div`
   /* background-color:gray; */
   padding: 7rem 0;
   transition-duration: .1s;
+  h2{
+    margin-bottom: 1rem;
+  }
   .fila{
     margin: 0 auto;
     max-width: 95%;
@@ -82,14 +91,13 @@ export default function Nosotros() {
             <div className="principal">
             <img src="/me_entrada2.jpg"></img>
             <div>
-              <h2>¿Quienes somos ?</h2>
+              <h2>¿Quiénes somos ?</h2>
               <p>
                 Somos una empresa que brinda servicios y asesoramiento en la
-                venta, alquiler, tasaciones de inmuebles y a la administración
-                de propiedades. Nos ubicamos en Santa Rosa, La Pampa. Años de
+                venta, alquiler, tasaciones de inmuebles y administración
+                de propiedades. Años de
                 trayectoria avalan nuestra calidad de desempeño y
-                responsabilidad en cada solución inmobiliaria. Ante cualquier
-                consulta estamos a su disposición para ayudarlo.
+                responsabilidad en cada solución inmobiliaria.
               </p>
             </div>
             </div>
@@ -118,7 +126,7 @@ export default function Nosotros() {
             <div className="fila">
               <img src="./target.png"></img>
               <div>
-                <h2>Atención persionalizada</h2>
+                <h2>Atención personalizada</h2>
                 <p>
                   Nos orientamos a ofrecer un servicio de atención personalizada
                   adecuado a las necesidades de cada cliente, escuchando sus
