@@ -6,6 +6,8 @@ import Layout from "../components/Layout/Layout";
 import PanelDestacado from "../components/PanelDestacado";
 import Button from "../components/Layout/Button";
 import { FirebaseContext } from "../firebase";
+import "slick-carousel/slick/_slick.css";
+import "slick-carousel/slick/_slick-theme.css";
 // import {cargaContext} from '../components/FiltroContext'
 
 const ContenedorImagen = styled.div`
