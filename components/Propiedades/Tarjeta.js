@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import Link from "../Layout/ActiveLink";
+// import Link from "../Layout/ActiveLink";
+import Link from 'next/link';
 import ImgCarousel from "../Carousel/ImgCarousel";
 
 // ${props => props.bgColor ? 'var(--naranja)' : 'var(--blanco)'};

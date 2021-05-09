@@ -68,7 +68,7 @@ const Layout = (props) => {
       <Head>
         <title>ME - Inmobiliaria</title>
         <link rel="shortcut icon" type="image/jpg" href="/favicon-me.png" />
-        {/* <html lang="es"/> */}
+        <html lang="es"/>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
