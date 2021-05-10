@@ -1,5 +1,6 @@
 import React,{useEffect} from "react";
 import styled from "@emotion/styled";
+import $ from "jquery";
 
 const Contenedor = styled.div`
   top: 75%;
@@ -22,13 +23,17 @@ const Contenedor = styled.div`
 `;
 
 const LogoWhatsapp = () => {
-  var path = window.location.pathname;
+  useEffect(() => {
+    var path = window.location.pathname;
   if (path == '/propiedades') {
-    return('')
+    $(".wp").hide();
   }
+    
+  }, [])
+  
   
   return (
-    <Contenedor>
+    <Contenedor className="wp">
       <a
         href="https://api.whatsapp.com/send/?phone=+5492954596067&text&app_absent=0"
         target="_blank"
