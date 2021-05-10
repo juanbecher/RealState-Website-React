@@ -19,6 +19,7 @@ const ContenedorFooter = styled.div`
     flex-direction:column;
     margin-bottom:8px;
     margin-left:1rem;
+    list-style:none;
   }
   li {
     font-weight: bold;
@@ -39,6 +40,7 @@ const ContenedorFooter = styled.div`
     flex-direction: row;
     width: 95%;
     ul{
+      list-style:disc;
       flex-direction:row;
     }
     li{

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import styled from "@emotion/styled";
 
 const Contenedor = styled.div`
@@ -22,9 +22,11 @@ const Contenedor = styled.div`
 `;
 
 const LogoWhatsapp = () => {
-  if (window.location.pathname == '/propiedades') {
+  var path = window.location.pathname;
+  if (path == '/propiedades') {
     return('')
   }
+  
   return (
     <Contenedor>
       <a
