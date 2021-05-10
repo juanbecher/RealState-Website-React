@@ -164,8 +164,8 @@ export default function Sucursales() {
     }
   }, [errores]);
 
-  function enviarComentario(e) {
-    e.preventDefault();
+  function enviarComentario() {
+    // e.preventDefault();
 
     Email.send({
       // Host : "smtp.mailtrap.io",

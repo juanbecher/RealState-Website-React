@@ -18,6 +18,12 @@ const Contacto = styled.div`
   h4 {
     margin: 1rem 0;
   }
+
+  .notification-container {
+  position: fixed;
+  top: 100px !important;
+  right: 0;
+}
 `;
 
 const Campo = styled.div`
