@@ -17,7 +17,8 @@ const ContenedorFooter = styled.div`
   ul {
     display: flex;
     flex-direction:column;
-    margin-bottom:8px
+    margin-bottom:8px;
+    margin-left:1rem;
   }
   li {
     font-weight: bold;
@@ -62,12 +63,22 @@ const Contacto = styled.div`
   background-color: black;
   text-align: center;
   color: white;
+  div{
+    max-width: 1400px;
+    margin: 0 auto;
+  }
   p{
+    
     margin-bottom:0;
   }
   
   span {
     font-weight: bold;
+  }
+  @media (min-width: 768px){
+    p{
+      margin-left:10%;
+    }
   }
 `;
 
@@ -87,7 +98,7 @@ const Footer = () => {
         </Logo>
         {/* Contenido central */}
         <div>
-          <p>© 2021 Todos los derechos reservados - All rigths reserved </p>
+          
           <ul>
             <li>
               <Link href="/" activeClassName="active">
@@ -115,6 +126,7 @@ const Footer = () => {
               </Link>
             </li>
           </ul>
+          <p>© 2021 Todos los derechos reservados - All rigths reserved </p>
         </div>
         <div className="socialMedia">
           <a
@@ -129,11 +141,14 @@ const Footer = () => {
         </div>
       </ContenedorFooter>
       <Contacto>
+        <div>
         <a href="https://www.linkedin.com/in/juanbecher/" target="_blank">
           <p>
             Desarrollado por: <span>Juan Maria Becher</span>
           </p>
         </a>
+        </div>
+        
       </Contacto>
     </footer>
   );

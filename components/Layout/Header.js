@@ -70,7 +70,7 @@ const Header = () => {
       // console.log("pageheader:" +pageHeader.offsetHeight);
       // console.log("target:" + targetScroll);
         
-      console.log(scrollY);
+      // console.log(scrollY);
       if (scrollY > 200 || window.location.pathname != '/') {
         pageHeader.classList.add(fondoHeader);
         // pageHeader.addClass(fondoHeader);
