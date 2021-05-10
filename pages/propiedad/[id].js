@@ -130,10 +130,10 @@ const BotonEnviar = styled.input`
 `;
 
 const Propiedad = (props) => {
-  // const [propiedad, guardarPropiedad] = useState({});
+  const [propiedad, guardarPropiedad] = useState({});
   const [error, guardarError] = useState(false);
-  // const [imagenes, guardarImagenes] = useState([]);
-  var imagenes;
+  const [imagenes, guardarImagenes] = useState([]);
+  // var imagenes;
   const [mensaje, setMensaje] = useState({
     nombre: "",
     email: "",
@@ -149,49 +149,10 @@ const Propiedad = (props) => {
 
   const { firebase } = useContext(FirebaseContext);
 
-  if (router.isFallback) return <div className="preloader"></div>;
+  // if (router.isFallback) return <div className="preloader"></div>;
 
   // console.log({ ...props });
   // console.log(id);
-  const {
-    tipo,
-    operacion,
-    ambiente,
-    banio,
-    ubicacion,
-    descripcion,
-    urlimagen,
-    creado,
-    precio,
-    m2,
-    visible,
-    moneda,
-    coordinates
-  } = { ...props };
-  const propiedad = {...props}
-  // console.log(propiedad);
-
-  if (urlimagen) {
-      const img = urlimagen;
-      const fotos = [];
-      for (let i = 0; i < img.length; i++) {
-        // console.log("recorriendo imagenes" + i)
-        // console.log(img[i]);
-        fotos.push({
-          src: img[i],
-          w: 800,
-          h: 600,
-          id: i,
-        });
-        // guardarImagenes([...imagenes, {src: img[i],
-        //   w: 800,
-        //   h: 600}]);
-      }
-      imagenes=fotos
-      // guardarImagenes(fotos);
-  }
-  // console.log(testfotos)
-  
   // const {
   //   tipo,
   //   operacion,
@@ -204,8 +165,47 @@ const Propiedad = (props) => {
   //   precio,
   //   m2,
   //   visible,
-  //   moneda
-  // } = propiedad;
+  //   moneda,
+  //   coordinates
+  // } = { ...props };
+  // const propiedad = {...props}
+  // console.log(propiedad);
+
+  // if (urlimagen) {
+  //     const img = urlimagen;
+  //     const fotos = [];
+  //     for (let i = 0; i < img.length; i++) {
+  //       // console.log("recorriendo imagenes" + i)
+  //       // console.log(img[i]);
+  //       fotos.push({
+  //         src: img[i],
+  //         w: 800,
+  //         h: 600,
+  //         id: i,
+  //       });
+  //       // guardarImagenes([...imagenes, {src: img[i],
+  //       //   w: 800,
+  //       //   h: 600}]);
+  //     }
+  //     imagenes=fotos
+  //     // guardarImagenes(fotos);
+  // }
+  // console.log(testfotos)
+  
+  const {
+    tipo,
+    operacion,
+    ambiente,
+    banio,
+    ubicacion,
+    descripcion,
+    urlimagen,
+    creado,
+    precio,
+    m2,
+    visible,
+    moneda
+  } = propiedad;
 
   if (ubicacion) {
     const detalle_ubicacion = ubicacion.split(",");
@@ -243,25 +243,43 @@ const Propiedad = (props) => {
     }).then((message) => alert(message));
   };
 
-  // useEffect(() => {
-  //
+  useEffect(() => {
+    const arregloImagenes = (propiedad) =>{
+      const img = propiedad.urlimagen;
+      const fotos = [];
+      for (let i = 0; i < img.length; i++) {
+        // console.log("recorriendo imagenes" + i)
+        // console.log(img[i]);
+        fotos.push({
+          src: img[i],
+          w: 800,
+          h: 600,
+          id: i,
+        });
+        // guardarImagenes([...imagenes, {src: img[i],
+        //   w: 800,
+        //   h: 600}]);
+      }
+      // imagenes=fotos
+      guardarImagenes(fotos);
+    }
 
-  //   if (id) {
-  //     const obtenerPropiedad = async () => {
-  //       const propiedadQuery = await firebase.db
-  //         .collection("propiedades")
-  //         .doc(id);
-  //       const propiedad = await propiedadQuery.get();
-  //       if (propiedad.exists) {
-  //         guardarPropiedad(propiedad.data());
-  //         arregloImagenes(propiedad.data());
-  //       } else {
-  //         guardarError(true);
-  //       }
-  //     };
-  //     obtenerPropiedad();
-  //   }
-  // }, [id]);
+    if (id) {
+      const obtenerPropiedad = async () => {
+        const propiedadQuery = await firebase.db
+          .collection("propiedades")
+          .doc(id);
+        const propiedad = await propiedadQuery.get();
+        if (propiedad.exists) {
+          guardarPropiedad(propiedad.data());
+          arregloImagenes(propiedad.data());
+        } else {
+          guardarError(true);
+        }
+      };
+      obtenerPropiedad();
+    }
+  }, [id]);
 
   function numberWithCommas(x) {
     if (!x) {
@@ -403,45 +421,84 @@ const Propiedad = (props) => {
   );
 };
 
-export async function getStaticPaths() {
-  return {
-    paths: [{ params: { id: "KF5FTG0VOvAE01hnRb3a" } }],
-    fallback: true,
-  };
-}
-export async function getStaticProps(context) {
-  const { params } = context;
-  const { id } = params;
+// export async function getStaticPaths() {
 
-  return firebase.db
-    .collection("propiedades")
-    .doc(id)
-    .get()
-    .then((doc) => {
-      const data = doc.data();
-      const id = doc.id;
-
-      const props = {
-        ...data,
-        id,
-      };
-      return { props };
-    })
-    .catch(() => {
-      return { props: {} };
-    });
-}
-
-export default Propiedad;
+//   return {
+//     paths: [{ params: { id: "KF5FTG0VOvAE01hnRb3a" } }],
+//     fallback: true,
+//   };
+// }
 // export async function getStaticPaths(){
-//   // const propiedades = firebase.getPropiedad()
-//   // let paths = propiedades.map(prop => {
-//   //   return `/propiedad/${prop.id}`
-//   // })
-//   let paths = ["/propiedad/KF5FTG0VOvAE01hnRb3a"]
-//   return{
-//     paths,
-//     fallback:false
-//   }
+  // const propiedades = firebase.db
+  //   .collection("propiedades")
+  //   .get()
+  //   .then(({ docs }) => {
+  //     return docs.map((doc) => {
+  //       const data = doc.data()
+  //       const id = doc.id
+
+  //       return {
+  //         ...data,
+  //         id,
+  //       }
+  //     })
+  //   })
+
+  // return firebase.db
+  //   .collection("propiedades")
+  //   .orderBy("creado", "desc")
+  //   .onSnapshot((snapshot) => {
+  //     var test = snapshot.docs.map((doc) => {
+  //       return {
+  //         id: doc.id,
+  //       };
+  //     });
+  //     // return test;
+  //     let paths = test.map(test_part => {
+  //         return `/propiedad/${test_part.id}`
+  //       })
+  //     console.log(paths);
+  //     return{
+  //       paths,
+  //       fallback:false
+  //     }
+  //   });
+
+
+    // let paths = propiedades.map(prop => {
+    //   return `/propiedad/${prop.id}`
+    // })
+  //   console.log("prop...")
+  //   console.log(propiedades);
+  // let paths = ["/propiedad/KF5FTG0VOvAE01hnRb3a"]
+  // return{
+  //   paths,
+  //   fallback:false
+  // }
 
 // }
+// export async function getStaticProps(context) {
+//   const { params } = context;
+//   const { id } = params;
+
+//   return firebase.db
+//     .collection("propiedades")
+//     .doc(id)
+//     .get()
+//     .then((doc) => {
+//       const data = doc.data();
+//       const id = doc.id;
+
+//       const props = {
+//         ...data,
+//         id,
+//       };
+//       return { props };
+//     })
+//     .catch(() => {
+//       return { props: {} };
+//     });
+// }
+
+export default Propiedad;
+
