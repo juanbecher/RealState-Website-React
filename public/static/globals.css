@@ -41,11 +41,11 @@ a {
 
 .fondoHeader{
   transition-duration: 0.3s;
-  background-color: white;
+  background-color: white !important;
 }
 .fondoHeader a {
   
-  color: black;
+  color: black !important;
 }
 
 .link:hover{
@@ -121,7 +121,7 @@ background-color: #fd7b52;
   border-top: 10px solid #a63f5a;
   border-radius: 50%;
   animation-name: girar;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }

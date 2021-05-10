@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import Layout from "../../components/Layout/Layout";
 import { useRouter } from "next/router";
-import { FirebaseContext } from "../../firebase";
+import firebase, { FirebaseContext } from "../../firebase";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Error404 from "../../components/Layout/Error404";
 import Mapa from "../../components/Propiedades/Mapa2";
 import GaleriaFoto2 from "../../components/Propiedades/GaleriaFoto2";
 import image from "react-firebase-file-uploader/lib/utils/image";
-import FormContacto from '../../components/FormContacto';
+import FormContacto from "../../components/FormContacto";
 import Footer from "../../components/Layout/Footer";
+// import test from '../../components/getFirebase';
 
 const ContenedorPropiedad = styled.div`
   margin: 1rem 0 5rem 0;
@@ -128,18 +129,17 @@ const BotonEnviar = styled.input`
   }
 `;
 
-const Propiedad = () => {
-  const [propiedad, guardarPropiedad] = useState({});
+const Propiedad = (props) => {
+  // const [propiedad, guardarPropiedad] = useState({});
   const [error, guardarError] = useState(false);
-  const [imagenes, guardarImagenes] = useState([]);
+  // const [imagenes, guardarImagenes] = useState([]);
+  var imagenes;
   const [mensaje, setMensaje] = useState({
     nombre: "",
     email: "",
     telefono: "",
     descripcion: "",
   });
-  // console.log("imagenes:");
-  // console.log(imagenes);
 
   //Routing para obtener el id actual de la ruta
   const router = useRouter();
@@ -149,6 +149,10 @@ const Propiedad = () => {
 
   const { firebase } = useContext(FirebaseContext);
 
+  if (router.isFallback) return <div className="preloader"></div>;
+
+  // console.log({ ...props });
+  // console.log(id);
   const {
     tipo,
     operacion,
@@ -161,8 +165,47 @@ const Propiedad = () => {
     precio,
     m2,
     visible,
-    moneda
-  } = propiedad;
+    moneda,
+    coordinates
+  } = { ...props };
+  const propiedad = {...props}
+  // console.log(propiedad);
+
+  if (urlimagen) {
+      const img = urlimagen;
+      const fotos = [];
+      for (let i = 0; i < img.length; i++) {
+        // console.log("recorriendo imagenes" + i)
+        // console.log(img[i]);
+        fotos.push({
+          src: img[i],
+          w: 800,
+          h: 600,
+          id: i,
+        });
+        // guardarImagenes([...imagenes, {src: img[i],
+        //   w: 800,
+        //   h: 600}]);
+      }
+      imagenes=fotos
+      // guardarImagenes(fotos);
+  }
+  // console.log(testfotos)
+  
+  // const {
+  //   tipo,
+  //   operacion,
+  //   ambiente,
+  //   banio,
+  //   ubicacion,
+  //   descripcion,
+  //   urlimagen,
+  //   creado,
+  //   precio,
+  //   m2,
+  //   visible,
+  //   moneda
+  // } = propiedad;
 
   if (ubicacion) {
     const detalle_ubicacion = ubicacion.split(",");
@@ -200,42 +243,25 @@ const Propiedad = () => {
     }).then((message) => alert(message));
   };
 
-  useEffect(() => {
-    const arregloImagenes = (propiedad) => {
-      const img = propiedad.urlimagen;
-      const fotos = [];
-      for (let i = 0; i < img.length; i++) {
-        // console.log("recorriendo imagenes" + i)
-        // console.log(img[i]);
-        fotos.push({
-          src: img[i],
-          w: 800,
-          h: 600,
-          id: i,
-        });
-        // guardarImagenes([...imagenes, {src: img[i],
-        //   w: 800,
-        //   h: 600}]);
-      }
-      guardarImagenes(fotos);
-    };
+  // useEffect(() => {
+  //
 
-    if (id) {
-      const obtenerPropiedad = async () => {
-        const propiedadQuery = await firebase.db
-          .collection("propiedades")
-          .doc(id);
-        const propiedad = await propiedadQuery.get();
-        if (propiedad.exists) {
-          guardarPropiedad(propiedad.data());
-          arregloImagenes(propiedad.data());
-        } else {
-          guardarError(true);
-        }
-      };
-      obtenerPropiedad();
-    }
-  }, [id]);
+  //   if (id) {
+  //     const obtenerPropiedad = async () => {
+  //       const propiedadQuery = await firebase.db
+  //         .collection("propiedades")
+  //         .doc(id);
+  //       const propiedad = await propiedadQuery.get();
+  //       if (propiedad.exists) {
+  //         guardarPropiedad(propiedad.data());
+  //         arregloImagenes(propiedad.data());
+  //       } else {
+  //         guardarError(true);
+  //       }
+  //     };
+  //     obtenerPropiedad();
+  //   }
+  // }, [id]);
 
   function numberWithCommas(x) {
     if (!x) {
@@ -246,14 +272,14 @@ const Propiedad = () => {
   function getPrecio(precio, moneda) {
     if (precio) {
       if (moneda == "peso") {
-        return(`$ ${numberWithCommas(precio)}`)
-      }else if (moneda == "dolar") {
-        return(`USD ${numberWithCommas(precio)}`)
-      }else{
-        return(`$ ${numberWithCommas(precio)}`)
+        return `$ ${numberWithCommas(precio)}`;
+      } else if (moneda == "dolar") {
+        return `USD ${numberWithCommas(precio)}`;
+      } else {
+        return `$ ${numberWithCommas(precio)}`;
       }
-    }else{
-      return("Precio a consultar")
+    } else {
+      return "Precio a consultar";
     }
   }
 
@@ -298,14 +324,18 @@ const Propiedad = () => {
 
             <ContenedorPropiedad>
               <div>
-                {visible == "no" && 
+                {visible == "no" && (
                   <div>
-                  <h2 css={css`color:red;`}>
-                  Propiedad no disponible
-                  </h2>
-                </div>
-                }
-                
+                    <h2
+                      css={css`
+                        color: red;
+                      `}
+                    >
+                      Propiedad no disponible
+                    </h2>
+                  </div>
+                )}
+
                 <div
                   css={css`
                     display: flex;
@@ -315,15 +345,12 @@ const Propiedad = () => {
                   <h3>
                     {tipo} en {operacion}
                   </h3>
-                  <h2>{getPrecio(precio,moneda)}</h2>
+                  <h2>{getPrecio(precio, moneda)}</h2>
                   {/* {precio ? <h2>${numberWithCommas(precio)}</h2>
                   :<h2>Precio a consultar</h2>} */}
-                  
                 </div>
                 <div>
-                  <p>
-                  {ubicacion}
-                  </p>
+                  <p>{ubicacion}</p>
                 </div>
                 <ul className="lista">
                   <li>
@@ -346,32 +373,7 @@ const Propiedad = () => {
                 </ul>
 
                 <h3>Descripción</h3>
-                <p>
-                  {descripcion}
-                </p>
-                {/* <div css={css`margin:3rem 0; h4{margin:0}`}>
-                <h4>Servicios</h4>
-                <ContenedorServicios>
-                  <ul>
-                    <div><li>Lavadora</li></div>
-                    
-                    <div><li>Horno</li></div>
-                    
-                    <div><li>Ascensor</li></div>
-                    
-                    <div><li>Custodiando</li></div>
-                    
-                    <div><li>Mesa</li></div>
-                    
-                    <div><li>Sillas</li></div>
-                    
-                    <div><li>Almacenamiento</li></div>
-                    
-                    <div><li>Vestidor</li></div>
-                    
-                  </ul>
-                </ContenedorServicios>
-                </div> */}
+                <p>{descripcion}</p>
                 <div
                   css={css`
                     margin: 7rem 0;
@@ -387,7 +389,11 @@ const Propiedad = () => {
                 </div>
               </div>
               <Aside>
-                <FormContacto id={id} tipo={tipo} operacion={operacion}></FormContacto>
+                <FormContacto
+                  id={id}
+                  tipo={tipo}
+                  operacion={operacion}
+                ></FormContacto>
               </Aside>
             </ContenedorPropiedad>
           </div>
@@ -397,4 +403,45 @@ const Propiedad = () => {
   );
 };
 
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: { id: "KF5FTG0VOvAE01hnRb3a" } }],
+    fallback: true,
+  };
+}
+export async function getStaticProps(context) {
+  const { params } = context;
+  const { id } = params;
+
+  return firebase.db
+    .collection("propiedades")
+    .doc(id)
+    .get()
+    .then((doc) => {
+      const data = doc.data();
+      const id = doc.id;
+
+      const props = {
+        ...data,
+        id,
+      };
+      return { props };
+    })
+    .catch(() => {
+      return { props: {} };
+    });
+}
+
 export default Propiedad;
+// export async function getStaticPaths(){
+//   // const propiedades = firebase.getPropiedad()
+//   // let paths = propiedades.map(prop => {
+//   //   return `/propiedad/${prop.id}`
+//   // })
+//   let paths = ["/propiedad/KF5FTG0VOvAE01hnRb3a"]
+//   return{
+//     paths,
+//     fallback:false
+//   }
+
+// }

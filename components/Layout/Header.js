@@ -17,6 +17,14 @@ const ContenedorHeader = styled.div`
     flex-direction: row;
     width: 95%;
   }
+  /* .fondoHeader{
+  transition-duration: 0.3s;
+  background-color: white;
+}
+.fondoHeader a {
+  
+  color: black;
+} */
 `;
 const Logo = styled.div`
   
@@ -86,7 +94,7 @@ const Header = () => {
     const fondoHeader = "fondoHeader";
     if(window.location.pathname != '/'){
       setUrl_logo("/logo0605_negro2.png");
-      console.log("entro")
+      // console.log("entro")
       // pageHeader.classList.add(fondoHeader);
       pageHeader.addClass(fondoHeader)
     }
