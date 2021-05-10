@@ -3,11 +3,12 @@ import styled from "@emotion/styled";
 
 const Contenedor = styled.div`
   top: 70%;
-  left: 82%;
+  left: 85%;
   position: fixed;
   transition-duration: 0.5s;
+  z-index:99;
   img{
-      max-width:45px;
+      max-width:40px;
   }
   :hover{
       transform: scale(1.2)

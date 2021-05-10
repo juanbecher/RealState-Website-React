@@ -7,7 +7,7 @@ import ImgCarousel from "../Carousel/ImgCarousel";
 
 // ${props => props.bgColor ? 'var(--naranja)' : 'var(--blanco)'};
 const Card = styled.div`
-  padding: 10px;
+  
   /* flex-basis: calc(100% - 1rem); */
   background-color: #ffffff;
   height: 350px;
@@ -26,6 +26,7 @@ const Card = styled.div`
     /* flex-basis: calc(45% - 1rem); */
   }
   @media (min-width: 768px) {
+    padding: 10px;
     /* flex-basis: calc(33% - 1.5rem); */
   }
 `;

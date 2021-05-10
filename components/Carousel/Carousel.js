@@ -4,18 +4,30 @@ import styled from '@emotion/styled';
 import Tarjeta from '../Propiedades/Tarjeta'
 
 const ContenedorCarousel = styled.div`
-  padding:4rem;
+  padding:4rem 0rem;
   padding-bottom:6rem;
   .slick-prev:before, .slick-next:before {
     font-size: 25px;
+    color:black !important;
   }
   .slick-list {
     margin: 0 27px;
+  }
+  
+
+  @media (min-width: 768px) {
+    padding:4rem;
+    padding-bottom:6rem;
   }
 `
 const ContenedorTarjeta = styled.div`
 height: 370px;
 max-width: 300px;
+padding:1rem;
+@media (min-width: 768px) {
+  padding:0rem;
+  }
+
 `;
 const Carousel = (props) => {
   const settings = {
@@ -49,7 +61,8 @@ const Carousel = (props) => {
         settings: {
           infinite: true,
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          arrows: false
         }
       }
     ],

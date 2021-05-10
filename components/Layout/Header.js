@@ -70,8 +70,8 @@ const Header = () => {
       // console.log("pageheader:" +pageHeader.offsetHeight);
       // console.log("target:" + targetScroll);
         
-
-      if (scrollY > targetScroll || window.location.pathname != '/') {
+      console.log(scrollY);
+      if (scrollY > 200 || window.location.pathname != '/') {
         pageHeader.classList.add(fondoHeader);
         // pageHeader.addClass(fondoHeader);
         setUrl_logo("/logo0605_negro2.png");
