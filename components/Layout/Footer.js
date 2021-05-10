@@ -25,6 +25,7 @@ const ContenedorFooter = styled.div`
     margin: 5px 0;
   }
   p {
+    font-size: 1.3rem;
     margin-bottom: 0;
   }
   .socialMedia {
@@ -68,7 +69,7 @@ const Contacto = styled.div`
     margin: 0 auto;
   }
   p{
-    
+    font-size:1.3rem;
     margin-bottom:0;
   }
   
@@ -100,7 +101,7 @@ const Footer = () => {
         <div>
           
           <ul>
-            <li>
+            <li css={css`list-style:none;`}>
               <Link href="/" activeClassName="active">
                 <a>Home</a>
               </Link>

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 
 const Contenedor = styled.div`
-  top: 70%;
+  top: 75%;
   left: 85%;
   position: fixed;
   transition-duration: 0.5s;
@@ -16,12 +16,15 @@ const Contenedor = styled.div`
   @media (min-width: 768px){
     left: 93%;
     img{
-      max-width:55px;
+      max-width:45px;
   }
   }
 `;
 
 const LogoWhatsapp = () => {
+  if (window.location.pathname == '/propiedades') {
+    return('')
+  }
   return (
     <Contenedor>
       <a
