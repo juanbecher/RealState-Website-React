@@ -9,6 +9,8 @@ import Mapa from "../components/Propiedades/Mapa2";
 import validarEnviarConsulta from "../validacion/validarEnviarConsulta";
 import useValidacion from "../hooks/useValidacion";
 import $ from "jquery";
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const RowUno = styled.div`
   display: block;
@@ -69,6 +71,11 @@ const Contacto = styled.div`
   h4 {
     margin: 1rem 0;
   }
+  .notification-container {
+  position: fixed;
+  top: 100px !important;
+  right: 0;
+}
 `;
 
 const Campo = styled.div`
@@ -189,7 +196,7 @@ export default function Sucursales() {
       //   <div><p>Teléfono: </p><strong>${mensaje.telefono}</strong></div>
       //   <div><p>Comentario: </p><strong>${mensaje.descripcion}</strong></div>
       // </html>`
-    }).then((message) => alert(message));
+    }).then((message) => NotificationManager.success('Consulta enviada.'));
   }
 
   // const handleChange = (e) => {
@@ -199,7 +206,6 @@ export default function Sucursales() {
   //   });
   // };
   return (
-    <div>
       <Layout>
         <div className="classPadding">
           <div
@@ -285,6 +291,7 @@ export default function Sucursales() {
                   {/* <BotonEnviar type="submit" value="Enviar" /> */}
                   {/* </BotonEnviar> */}
                 </form>
+                <NotificationContainer/>
               </Contacto>
             </RowUno>
             <ContenedorMapa>
@@ -293,6 +300,5 @@ export default function Sucursales() {
           </div>
         </div>
       </Layout>
-    </div>
   );
 }
