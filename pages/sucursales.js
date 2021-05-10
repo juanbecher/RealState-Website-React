@@ -63,6 +63,7 @@ const Contenedor = styled.div`
 const Contacto = styled.div`
   /* margin: 0 2rem; */
   padding: 1rem 2rem;
+  margin-top:2rem;
   /* border:1px solid black; */
   box-shadow: 1px 1px 20px 0 rgb(0 0 0 / 10%);
   height: 440px;
@@ -76,6 +77,9 @@ const Contacto = styled.div`
   top: 100px !important;
   right: 0;
 }
+@media (min-width: 768px) {
+  margin-top:0rem;
+  }
 `;
 
 const Campo = styled.div`
@@ -212,6 +216,7 @@ export default function Sucursales() {
             css={css`
               max-width: 1000px;
               margin: auto auto;
+              width:95%;
             `}
           >
             <RowUno className="altura">
