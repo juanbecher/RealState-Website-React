@@ -95,7 +95,8 @@ const Layout = (props) => {
         />
         {/* <link rel="stylesheet" href="slick-carousel/slick/_slick.css"></link>
         <link rel="stylesheet" href="slick-carousel/slick/_slick-theme.css"></link> */}
-
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
 
         {/* <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0-rU3vYLOIiSgtfbfVC_m4SqRigS9vyk&libraries=places"></script> */}
       </Head>
