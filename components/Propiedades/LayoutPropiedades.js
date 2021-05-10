@@ -77,7 +77,7 @@ const OrdenarLayout = styled.div`
 `;
 const Ordenar = styled.div`
   margin: 0rem 1.5rem 1rem 0;
-
+  
   .collapsible_ord {
     display: none;
     background-color: white;
@@ -116,6 +116,7 @@ const Ordenar = styled.div`
     border-left: 3px solid var(--rojo) !important;
   }
   @media (min-width: 768px) {
+    min-width:120px;
     .collapsible_ord {
       display: block;
     }
@@ -232,6 +233,13 @@ const LayoutPropiedades = ({
         }
       });
     }
+    // !$(e.target).is(".content") && 
+    // $(document).click(function (e) {
+    //   if (!$(e.target).is(".collapsible_ord")) {
+    //     $(".content_ord").hide();
+    //   }
+    // });
+
     // Agregaa clase activa a boton Ordenar
     $(document).ready(function () {
       $(".boton").on("click", function () {
@@ -247,6 +255,11 @@ const LayoutPropiedades = ({
 
   const guardaOrdenar = (e) => {
     guardarOrdenar(e.target.value);
+    var w = window.innerWidth;
+    if (w >= 768) {
+      $(".content_ord").hide();
+    }
+    
   };
   return (
     <div>

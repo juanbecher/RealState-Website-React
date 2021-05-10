@@ -6,55 +6,57 @@ import { css } from "@emotion/react";
 import Layout from "../components/Layout/Layout";
 import { FirebaseContext } from "../firebase";
 import $ from "jquery";
-import LayoutPropiedades from '../components/Propiedades/LayoutPropiedades'
+import LayoutPropiedades from "../components/Propiedades/LayoutPropiedades";
 // import FiltroContext from '../context/FiltroContext'
-
 
 const ContenedorFiltros = styled.div`
   position: fixed;
-  transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
+  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
   top: 0;
   right: 0;
   width: 100%;
   height: 100%;
   /* padding-top: 5rem; */
   transition: transform 0.3s ease-in-out;
-  
+
   background-color: white;
   z-index: 3;
-  .selectorFiltro{
-    display:block;
+  .selectorFiltro {
+    display: block;
   }
-  .cerrar{
-    h3{
-      padding:2rem 2rem;
+  .cerrar {
+    h3 {
+      padding: 2rem 2rem;
     }
-    img{
-      padding:2rem;
+    img {
+      padding: 2rem;
     }
   }
-  @media(min-width: 768px){
+  @media (min-width: 768px) {
     position: sticky;
-    transform:none;
-    transition:none;
+    transform: none;
+    transition: none;
     top: 82px;
-    .cerrar{display:none;}
-    .selectorFiltro{display:flex;}
+    .cerrar {
+      display: none;
+    }
+    .selectorFiltro {
+      display: flex;
+    }
   }
-
-  
 `;
 
 const Filtro = styled.div`
   margin: 1rem 1.5rem 1rem 0;
 
-  .collapsible {
+  .collapsible,
+  .collapsible_precio {
     background-color: white;
     color: #444;
     cursor: pointer;
     padding: 10px;
     width: 100%;
-    border:none;
+    border: none;
     border-top: 1px solid #e2e2e2;
     text-align: left;
     outline: none;
@@ -66,7 +68,7 @@ const Filtro = styled.div`
     position: relative;
     /* max-width: 300px;
     min-width: 200px; */
-    width:100%;
+    width: 100%;
     padding: 0 15px;
     display: none;
     overflow: hidden;
@@ -76,39 +78,42 @@ const Filtro = styled.div`
     z-index: 10;
   }
 
-  @media(min-width: 768px){
-    .collapsible {
-    background-color: white;
-    color: #444;
-    cursor: pointer;
-    padding: 10px;
-    width: 100%;
-    border: 1px solid #b1b1b1;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    border-radius: 12px;
-    /* box-shadow: 1px 1px 20px 0 rgb(0 0 0 / 10%); */
-  }
-  .activa_filtro, .collapsible:hover {
-  background-color: #eaeaea;
-}
+  @media (min-width: 768px) {
+    .collapsible,
+    .collapsible_precio {
+      background-color: white;
+      color: #444;
+      cursor: pointer;
+      padding: 10px;
+      width: 100%;
+      border: 1px solid #b1b1b1;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+      border-radius: 12px;
+      /* box-shadow: 1px 1px 20px 0 rgb(0 0 0 / 10%); */
+    }
+    .activa_filtro,
+    .collapsible:hover,
+    .collapsible_precio:hover {
+      background-color: #eaeaea;
+    }
 
-  .content {
-    display: block;
-    position: absolute;
-    max-width: 300px;
-    min-width: 200px;
-    padding: 0 15px;
-    display: none;
-    overflow: hidden;
-    background-color: white;
-    border: 1px solid #b1b1b1;
-    border-radius: 5px;
-    box-shadow: 1px 1px 20px 0 rgb(0 0 0 / 10%);
-    margin-top: 1rem;
-    z-index: 10;
-  }
+    .content {
+      display: block;
+      position: absolute;
+      max-width: 300px;
+      min-width: 200px;
+      padding: 0 15px;
+      display: none;
+      overflow: hidden;
+      background-color: white;
+      border: 1px solid #b1b1b1;
+      border-radius: 5px;
+      box-shadow: 1px 1px 20px 0 rgb(0 0 0 / 10%);
+      margin-top: 1rem;
+      z-index: 10;
+    }
   }
 `;
 
@@ -144,55 +149,52 @@ const Box = styled.div`
   }
 `;
 const Filtroplicado = styled.div`
-
-label{
-    display:inline-flex;
-    margin:1rem 0;
+  label {
+    display: inline-flex;
+    margin: 1rem 0;
     margin-right: 1rem;
-    border-radius:3px;
-    padding:5px 10px;
+    border-radius: 3px;
+    padding: 5px 10px;
     /* background-color: var(--gris3); */
-    background-color:#eaeaea;
-    :hover{
-      cursor:pointer;
+    background-color: #eaeaea;
+    :hover {
+      cursor: pointer;
     }
   }
   /* i{
     background-image: url("./cancel.png");
   } */
-  .cancel{
+  .cancel {
     /* display: inline-flex; */
-    height:12px;
+    height: 12px;
     margin: auto 5px;
     margin-right: 3px;
   }
-  .cancel::before{
+  .cancel::before {
     /* content: url("./cancel.svg"); */
   }
 `;
 
 const FiltroMobile = styled.div`
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   position: sticky;
   top: 82px;
-  text-align:center;
-  background-color:white;
+  text-align: center;
+  background-color: white;
   z-index: 1;
   border-top: 1px solid #e2e2e2;
   box-shadow: rgb(0 0 0 / 10%) 0px 4px 2px -2px;
-  img{
+  img {
     margin: 5px 0;
   }
-  .ordenar{
-
+  .ordenar {
   }
-  .filtrar{
-    
+  .filtrar {
   }
 
-  @media(min-width: 768px){
-    display:none;
+  @media (min-width: 768px) {
+    display: none;
   }
 `;
 
@@ -201,14 +203,17 @@ export default function Propiedades() {
   // const [filtros, guardarfiltros] = useState([]);
   const [filtroAmbiente, guardarFiltroAmbiente] = useState([]);
   const [filtroPrecio, guardarFiltroPrecio] = useState({ Desde: 0, Hasta: 0 });
-  const [filtroMoneda, guardarFiltroMoneda] = useState("")
+  const [filtroMoneda, guardarFiltroMoneda] = useState("");
   const [ordenar, guardarOrdenar] = useState("Más recientes");
-  const { firebase,filtroOperacion,
+  const {
+    firebase,
+    filtroOperacion,
     guardarFiltroOperacion,
     filtros,
-    guardarfiltros } = useContext(FirebaseContext);
-  const [open, setopen] = useState(false)
-  const [open_ordenar, setOpen_ordenar] = useState(false)
+    guardarfiltros,
+  } = useContext(FirebaseContext);
+  const [open, setopen] = useState(false);
+  const [open_ordenar, setOpen_ordenar] = useState(false);
 
   console.log(filtroMoneda);
   const [propiedades, GuardarPropiedades] = useState([]);
@@ -285,13 +290,13 @@ export default function Propiedades() {
         propiedades[i].creado_date = `${day}-${month}-${year}`;
       }
     }
-    propiedades = propiedades.filter(propiedad => propiedad.visible == "si")
+    propiedades = propiedades.filter((propiedad) => propiedad.visible == "si");
     GuardarPropiedades(propiedades);
     var propConFiltro = propiedades.filter(verificaFiltros);
     if (filtros) {
-      $(`#${filtros[0]}`).prop( "checked", true );
+      $(`#${filtros[0]}`).prop("checked", true);
     }
-    
+
     GuardarPropiedadesFiltro(propConFiltro);
   }
 
@@ -312,40 +317,39 @@ export default function Propiedades() {
     //   });
     // }
 
-
     var coll = document.getElementsByClassName("collapsible");
-var i;
+    var i;
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    // this.classList.toggle("activa_filtro");
-    $(".collapsible").removeClass("activa_filtro")
-    $(this).addClass("activa_filtro");
-    var content = this.nextElementSibling;
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function () {
+        // this.classList.toggle("activa_filtro");
+        $(".collapsible").removeClass("activa_filtro");
+        $(this).addClass("activa_filtro");
+        var content = this.nextElementSibling;
 
-    if (content.style.display === "block") {
-      content.style.display = "none";
-      $(this).removeClass("activa_filtro");
-    } else {
-      $(".content").css( "display", "none" );
-      content.style.display = "block";
+        if (content.style.display === "block") {
+          content.style.display = "none";
+          $(this).removeClass("activa_filtro");
+        } else {
+          $(".content").css("display", "none");
+          content.style.display = "block";
+        }
+      });
     }
-  });
-}
+    // collapsible para precio
 
-
-    // $(document).click(function (e) {
-    //   if (!$(e.target).is(".content") && !$(e.target).is(".collapsible")) {
-    //     $(".content").hide();
-    //   }
-    // });
+    $(document).click(function (e) {
+      if (
+        !$(e.target).is(".content") &&
+        !$(e.target).is(".collapsible") &&
+        !$(e.target).is(".abierto")
+      ) {
+        $(".content").hide();
+        $(".collapsible").removeClass("activa_filtro");
+      }
+    });
 
     // && !$(e.target).is('.content')
-
-    
-
-
-    
 
     const agregaSahdow = () => {
       if (window.pageYOffset > 0) {
@@ -358,13 +362,12 @@ for (i = 0; i < coll.length; i++) {
     // Asigna boxshadow a filtros cuando se scrollea
     window.addEventListener("scroll", agregaSahdow);
     return () => {
-      window.removeEventListener("scroll",agregaSahdow);
+      window.removeEventListener("scroll", agregaSahdow);
     };
   }, []);
 
   // EFFECT FILTROS
   useEffect(() => {
-    
     var propConFiltro = propiedades.filter(verificaFiltros);
     // var propConFiltro = propiedadesFiltro;
     if (ordenar == "Más recientes") {
@@ -376,35 +379,39 @@ for (i = 0; i < coll.length; i++) {
     }
     if (ordenar == "Mayor precio") {
       // console.log("entro2");
-      propConFiltro = propConFiltro.sort(function(a,b){
-        a = parseInt(a.precio)
-        b = parseInt(b.precio)
-        if(isNaN(b)) { 
+      propConFiltro = propConFiltro.sort(function (a, b) {
+        a = parseInt(a.precio);
+        b = parseInt(b.precio);
+        if (isNaN(b)) {
           return -1;
         } else {
-          return b-a; 
+          return b - a;
         }
-      })
-        // (a, b) => parseInt(b.precio) - parseInt(a.precio)
-      
+      });
+      // (a, b) => parseInt(b.precio) - parseInt(a.precio)
     }
     if (ordenar == "Menor precio") {
       // console.log("entro3");
-      propConFiltro = propConFiltro.sort(function(a,b){
-        a = parseInt(a.precio)
-        b = parseInt(b.precio)
-        if(isNaN(b)) { 
+      propConFiltro = propConFiltro.sort(function (a, b) {
+        a = parseInt(a.precio);
+        b = parseInt(b.precio);
+        if (isNaN(b)) {
           return -1;
         } else {
-          return a-b; 
+          return a - b;
         }
       });
     }
-    
+
     GuardarPropiedadesFiltro(propConFiltro);
-
-
-  }, [filtroOperacion, filtros, filtroAmbiente, filtroPrecio, ordenar]);
+  }, [
+    filtroOperacion,
+    filtros,
+    filtroAmbiente,
+    filtroPrecio,
+    ordenar,
+    filtroMoneda,
+  ]);
 
   // handle para checkbox
   const handleChange = (e) => {
@@ -438,8 +445,12 @@ for (i = 0; i < coll.length; i++) {
   // handle para tipo operacion
   const guardaOperacion = (e) => {
     guardarFiltroOperacion(e.target.id);
+    var w = window.innerWidth;
+    if (w >= 768) {
+      $(".content").hide();
+    }
   };
-  
+
   // handle para precio
   const guardaPrecio = (e) => {
     const nombre = e.target.name;
@@ -453,57 +464,64 @@ for (i = 0; i < coll.length; i++) {
     });
   };
 
-  const guardaMoneda =  (e) =>{
-    guardarFiltroMoneda(e.target.value)
-  }
+  const guardaMoneda = (e) => {
+    guardarFiltroMoneda(e.target.value);
+  };
   // handle para ordenar
   // const guardaOrdenar = (e) => {
   //   guardarOrdenar(e.target.value);
   // };
 
-  // Remueve filtros 
+  // Remueve filtros
   const remueveFiltro = (e) => {
-    const id= e.target.id;
-    const name= e.target.getAttribute('name');
+    const id = e.target.id;
+    const name = e.target.getAttribute("name");
 
     if (name == "tipo") {
       guardarfiltros(filtros.filter((filtro) => filtro !== id));
-      $(`#${id}`).prop('checked', false);
+      $(`#${id}`).prop("checked", false);
     }
     if (name == "operacion") {
       guardarFiltroOperacion(undefined);
     }
-    if (name=="ambiente") {
+    if (name == "ambiente") {
       guardarFiltroAmbiente(filtroAmbiente.filter((filtro) => filtro !== id));
-      $(`#${id}`).prop('checked', false);
+      $(`#${id}`).prop("checked", false);
+    }
+    if (name == "moneda") {
+      guardarFiltroMoneda("");
     }
 
-    if (name=="precio") {
-      guardarFiltroPrecio({ Desde: 0, Hasta: 0 })
-      guardarFiltroMoneda("")
-      $(`.moneda`).prop('checked', false);
+    if (name == "precio") {
+      guardarFiltroPrecio({ Desde: 0, Hasta: 0 });
+      // guardarFiltroMoneda("");
+      $(`.moneda`).prop("checked", false);
       $(`#precio_D`).val("");
       $(`#precio_H`).val("");
     }
-  }
+  };
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
+  }
   return (
     <>
       <Layout>
         <FiltroMobile>
-          <div className="ordernar" open={open_ordenar} onClick={() => setOpen_ordenar(!open_ordenar)}>
+          <div
+            className="ordernar"
+            open={open_ordenar}
+            onClick={() => setOpen_ordenar(!open_ordenar)}
+          >
             <img src="/sort-ascending_claro.png"></img>
           </div>
           <div className="filtrar" open={open} onClick={() => setopen(!open)}>
-          <img src="/filter_claro.png"></img>
+            <img src="/filter_claro.png"></img>
           </div>
         </FiltroMobile>
         <ContenedorFiltros id="filtro" open={open}>
-          <div className="cerrar" >
-          <img src="/right-arrow.png" onClick={() => setopen(!open)}></img>
+          <div className="cerrar">
+            <img src="/right-arrow.png" onClick={() => setopen(!open)}></img>
             <h3>Filtrar por</h3>
           </div>
           <div className="contenedor selectorFiltro">
@@ -686,15 +704,36 @@ for (i = 0; i < coll.length; i++) {
                 Precio
               </button>
               <div className="content">
-              <div css={css`padding:1rem; label{padding:0 1rem;}`}>
-                <label>
-                <input className="moneda" type="radio" name="moneda" value="peso" onChange={guardaMoneda}/> Peso ($)
-                </label>
-                <label>
-                <input className="moneda" type="radio" name="moneda" value="dolar" onChange={guardaMoneda}/> Dolar (USD)
-                </label>
-              </div>
-              
+                <div
+                  css={css`
+                    padding: 1rem;
+                    label {
+                      padding: 0 1rem;
+                    }
+                  `}
+                >
+                  <label className="abierto">
+                    <input
+                      className="moneda abierto"
+                      type="radio"
+                      name="moneda"
+                      value="peso"
+                      onChange={guardaMoneda}
+                    />{" "}
+                    Peso ($)
+                  </label>
+                  <label className="abierto">
+                    <input
+                      className="moneda abierto"
+                      type="radio"
+                      name="moneda"
+                      value="dolar"
+                      onChange={guardaMoneda}
+                    />{" "}
+                    Dolar (USD)
+                  </label>
+                </div>
+
                 <div
                   css={css`
                     display: grid;
@@ -703,8 +742,10 @@ for (i = 0; i < coll.length; i++) {
                   `}
                 >
                   <Box>
-                    <label>
+                    {/* Abierto es solo para mantener el collapsible abierto en la pestaña precio */}
+                    <label className="abierto">
                       <input
+                        className="abierto"
                         id="precio_D"
                         type="number"
                         name="Desde"
@@ -714,8 +755,9 @@ for (i = 0; i < coll.length; i++) {
                     </label>
                   </Box>
                   <Box>
-                    <label>
+                    <label className="abierto">
                       <input
+                        className="abierto"
                         id="precio_H"
                         type="number"
                         name="Hasta"
@@ -729,38 +771,92 @@ for (i = 0; i < coll.length; i++) {
             </Filtro>
           </div>
           <Filtroplicado className="contenedor">
-              {filtroOperacion && <label id={filtroOperacion} name="operacion" onClick={remueveFiltro}>
+            {filtroOperacion && (
+              <label
+                id={filtroOperacion}
+                name="operacion"
+                onClick={remueveFiltro}
+              >
                 {filtroOperacion}
-                <img className="cancel" src="/cancel.svg" id={filtroOperacion} name="operacion" onClick={remueveFiltro}/>
-                </label>}
-
-              {filtros.length !==0 && (filtros.map((filtro) =>(<label id={filtro} name="tipo" onClick={remueveFiltro}>
-              {filtro}
-              <img src="/cancel.svg" id={filtro} name="tipo" onClick={remueveFiltro} className="cancel"/>
-              </label>)))}
-
-              {filtroAmbiente.length !==0 && (filtroAmbiente.map((ambiente) =>(<label id={ambiente} name="ambiente" onClick={remueveFiltro}>
-              {ambiente} Ambiente
-              <img src="/cancel.svg" id={ambiente} name="ambiente" onClick={remueveFiltro} className="cancel"/>
+                <img
+                  className="cancel"
+                  src="/cancel.svg"
+                  id={filtroOperacion}
+                  name="operacion"
+                  onClick={remueveFiltro}
+                />
               </label>
-              )))}
+            )}
 
-              {(filtroPrecio.Desde !== 0 || filtroPrecio.Hasta !== 0) && (<label id="precio" name="precio" onClick={remueveFiltro}>
-              ${numberWithCommas(filtroPrecio.Desde)} a ${numberWithCommas(filtroPrecio.Hasta)}
-              <img src="/cancel.svg" id="precio" name="precio" onClick={remueveFiltro} className="cancel"/>
+            {filtros.length !== 0 &&
+              filtros.map((filtro) => (
+                <label id={filtro} name="tipo" onClick={remueveFiltro}>
+                  {filtro}
+                  <img
+                    src="/cancel.svg"
+                    id={filtro}
+                    name="tipo"
+                    onClick={remueveFiltro}
+                    className="cancel"
+                  />
+                </label>
+              ))}
+
+            {filtroAmbiente.length !== 0 &&
+              filtroAmbiente.map((ambiente) => (
+                <label id={ambiente} name="ambiente" onClick={remueveFiltro}>
+                  {ambiente} Ambiente
+                  <img
+                    src="/cancel.svg"
+                    id={ambiente}
+                    name="ambiente"
+                    onClick={remueveFiltro}
+                    className="cancel"
+                  />
+                </label>
+              ))}
+            {filtroMoneda && (
+              <label
+                id={filtroMoneda}
+                name="moneda"
+                onClick={remueveFiltro}
+              >
+                {filtroMoneda.charAt(0).toUpperCase() + filtroMoneda.slice(1)}
+                <img
+                  className="cancel"
+                  src="/cancel.svg"
+                  id={filtroMoneda}
+                  name="moneda"
+                  onClick={remueveFiltro}
+                />
               </label>
-              )}
+            )}
+            {(filtroPrecio.Desde !== 0 || filtroPrecio.Hasta !== 0) && (
+              <label id="precio" name="precio" onClick={remueveFiltro}>
+                ${numberWithCommas(filtroPrecio.Desde)} a $
+                {numberWithCommas(filtroPrecio.Hasta)}
+                <img
+                  src="/cancel.svg"
+                  id="precio"
+                  name="precio"
+                  onClick={remueveFiltro}
+                  className="cancel"
+                />
+              </label>
+            )}
           </Filtroplicado>
         </ContenedorFiltros>
 
         <div className="classPadding contenedor">
-          
-            <LayoutPropiedades propiedadesFiltro={propiedadesFiltro} ordenar={ordenar} guardarOrdenar={guardarOrdenar} 
-            open_ordenar={open_ordenar} setOpen_ordenar={setOpen_ordenar}/>
-            
-          
-            {/* <div className="preloader"></div> */}
-          
+          <LayoutPropiedades
+            propiedadesFiltro={propiedadesFiltro}
+            ordenar={ordenar}
+            guardarOrdenar={guardarOrdenar}
+            open_ordenar={open_ordenar}
+            setOpen_ordenar={setOpen_ordenar}
+          />
+
+          {/* <div className="preloader"></div> */}
         </div>
       </Layout>
     </>
