@@ -13,7 +13,7 @@ import { FirebaseContext } from "../firebase";
 const ContenedorImagen = styled.div`
   /* padding-top:10rem; */
   /* border: solid transparent; */
-  background-image: url("./header2.jpg");
+  background-image: url("./header2_compr.jpg");
   /* background-image: url("https://www.zillowstatic.com/s3/homepage/static/_Desktop_Overlay_ReadyChange_HC.jpg"); */
   /* background-position: center center; */
   background-size: cover;

@@ -32,7 +32,7 @@ const ContenedorFooter = styled.div`
   .socialMedia {
     display: flex;
     img {
-      width: 50px;
+      width: 40px;
       margin: 1rem 1rem;
     }
   }
@@ -136,10 +136,10 @@ const Footer = () => {
             href="https://www.facebook.com/monicaemilio.bienesraices"
             target="_blank"
           >
-            <img src="/face.png" alt="Facebook"></img>
+            <img src="/facex64.png" alt="Facebook"></img>
           </a>
           <a href="https://www.instagram.com/memiliobr/" target="_blank">
-            <img src="/insta.png" alt="Instragram"></img>
+            <img src="/instax642.png" alt="Instragram"></img>
           </a>
         </div>
       </ContenedorFooter>
