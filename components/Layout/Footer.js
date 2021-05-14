@@ -96,7 +96,7 @@ const Footer = () => {
       <ContenedorFooter>
         <Logo>
           <Link href="/">
-            <img src="/logo0605_blanco.png" alt="Logo"></img>
+            <img src="/logo_blanco.png" alt="Logo"></img>
           </Link>
         </Logo>
         {/* Contenido central */}

@@ -33,6 +33,9 @@ a {
 .classPadding{
   padding-top: 10rem;
 }
+.classPadding_8{
+  padding-top: 8rem;
+}
 
 .flex{
   display: flex;

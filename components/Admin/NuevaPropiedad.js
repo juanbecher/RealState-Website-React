@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "@emotion/styled";
+
 import Router, { useRouter } from "next/router";
 import { Formulario, Error } from "../Layout/Formulario";
 import firebase, { FirebaseContext } from "../../firebase";
@@ -9,10 +10,16 @@ import useValidacion from "../../hooks/useValidacion";
 import validarNuevaPropiedad from "../../validacion/validarNuevaPropiedad";
 import InputAdress from "../InputAdress";
 
-import 'react-notifications/lib/notifications.css';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 import { css } from "@emotion/react";
+// import SortableImage from "../SortableImages";
+// import { ReactSortable } from "react-sortablejs";
+import SortImage from '../SortImage';
 
 const Contenedor = styled.div`
   max-width: 70%;
@@ -153,21 +160,25 @@ const STATE_INICIAL = {
   m2: "",
   precio: "",
   destacado: "",
-  moneda: ""
+  moneda: "",
 };
 
 const NuevaPropiedad = () => {
   const [error, guardarError] = useState(false);
   const [imagenCargada, guardarImagenCargada] = useState(false);
   const [file, setFile] = useState([]);
-  const [urlimagen, setURL] = useState([]);
-  const [nombreimagen, setNombreImagen] = useState([])
-  const [ubicacion, setUbicacion] = useState("")
+  const [file_backup, setFileBack] = useState([]);
+  const [preview_fotos, setPreview_fotos] = useState([]);
+  console.log(preview_fotos);
+  const [urlimagen_2, setURL] = useState([]);
+  const [nombreimagen, setNombreImagen] = useState([]);
+  const [ubicacion, setUbicacion] = useState("");
   const [coordinates, setCoordinates] = useState({
     lat: null,
-    lng: null
+    lng: null,
   });
-  // console.log(urlimagen);
+  // console.log(file);
+  // console.log(file.indexOf);
 
   const { valores, errores, handleSubmit, handleChange } = useValidacion(
     STATE_INICIAL,
@@ -186,7 +197,7 @@ const NuevaPropiedad = () => {
     m2,
     precio,
     destacado,
-    moneda
+    moneda,
   } = valores;
   // console.log(valores);
 
@@ -198,12 +209,16 @@ const NuevaPropiedad = () => {
 
   async function crearPropiedad() {
     if (!imagenCargada) {
-      return NotificationManager.error('Debe subir alguna imagen.');
+      return NotificationManager.error("Debe subir alguna imagen.");
     }
     console.log("Creando propiedad");
     // valida si hay usuario pero en este caso no es necesrio
     const visible = "si";
     // crea el objeto de nueva propiedad
+    urlimagen_2.sort(sorter);
+
+    const urlimagen = urlimagen_2.map((e) => e.url);
+
     const detallePropiedad = {
       propiedad,
       tipo,
@@ -225,11 +240,12 @@ const NuevaPropiedad = () => {
 
     // insertando en DB
     console.log(detallePropiedad);
-    firebase.db.collection("propiedades").add(detallePropiedad)
-    // .then(() => 
+    firebase.db.collection("propiedades").add(detallePropiedad);
+    // .then(() =>
     // NotificationManager.success('Propiedad creada'));
-    return router.push("/admin").then(() => 
-    NotificationManager.success('Propiedad creada'));
+    return router
+      .push("/admin")
+      .then(() => NotificationManager.success("Propiedad creada"));
   }
 
   // const handleUploadStart = () => {
@@ -290,17 +306,35 @@ const NuevaPropiedad = () => {
   // };
   ////
 
+  // console.log(file);
+
+  // console.log(urlimagen);
   function handleChange2(e) {
-    setFile(e.target.files[0]);
+    // console.log(e.target.files)
+    // setFile(e.target.files[0]);
     const fotos = [];
+    const preview = [];
     for (let i = 0; i < e.target.files.length; i++) {
-      var nombre = `${Math.floor(Math.random() * 1000000)}-${e.target.files[i].name}`;
+      var nombre = `${Math.floor(Math.random() * 1000000)}_${
+        e.target.files[i].name
+      }`;
       e.target.files[i].nombre = nombre;
-      console.log(e.target.files[i]);
+      // console.log(e.target.files[i]);
       fotos.push(e.target.files[i]);
+      preview.push({nombre: nombre,preview: URL.createObjectURL(e.target.files[i])})
     }
     setFile(fotos);
+    setPreview_fotos(preview);
+    // setFileBack(fotos);
   }
+
+  const sorter = (a, b) => {
+    // myArray.map(function(e) { return e.hello; }).indexOf('stevie');
+    return (
+      preview_fotos.map((e) => e.nombre).indexOf(a.nombre) -
+      preview_fotos.map((e) => e.nombre).indexOf(b.nombre)
+    );
+  };
 
   function handleUpload(e) {
     // console.log(file)
@@ -309,6 +343,11 @@ const NuevaPropiedad = () => {
     const fotosURL = [];
     const fotosNombre = [];
     for (let i = 0; i < file.length; i++) {
+      // console.log(file[i].nombre);
+
+      // const file_subir = file_backup.filter(
+      //   (imagen) => imagen.nombre == file[i].nombre
+      // );
       const uploadTask = firebase.storage
         .ref(`/propiedades/${file[i].nombre}`)
         .put(file[i]);
@@ -318,17 +357,22 @@ const NuevaPropiedad = () => {
           .child(file[i].nombre)
           .getDownloadURL()
           .then((url) => {
-            fotosURL.push(url);
-            fotosNombre.push(file[i].nombre)
+            console.log(file[i].nombre);
+            fotosURL.push({ nombre: file[i].nombre, url: url  });
+            // fotosURL.push(url);
+            fotosNombre.push(file[i].nombre);
             // setURL(url);
-          });
+          }).then();
       });
     }
     // console.log(fotosURL);
     setURL(fotosURL);
-    setNombreImagen(fotosNombre)
-    setFile(null);
+    // console.log(fotosURL);
+    setNombreImagen(fotosNombre);
     guardarImagenCargada(true);
+    
+    // setFile(null);
+    
 
     // const uploadTask = firebase.storage.ref(`/propiedades/${file[i].name}`).put(file[i]);
     // uploadTask.on("state_changed", console.log, console.error, () => {
@@ -347,7 +391,7 @@ const NuevaPropiedad = () => {
 
   useEffect(() => {
     // const tipos = new Array("casa","casa-quinta","departamento")
-    if (tipo == "Casa" || tipo == "Casa quinta" || tipo == "Departamento") {
+    if (tipo == "Casa" || tipo == "Quinta" || tipo == "Departamento") {
       // console.log("entro");
       $("#ambiente").prop("disabled", false);
       $("#banio").prop("disabled", false);
@@ -358,11 +402,19 @@ const NuevaPropiedad = () => {
     }
     if (propiedad == "Emprendimiento") {
       $("#tipo").prop("disabled", true);
-    }else{
+    } else {
       $("#tipo").prop("disabled", false);
     }
   }, [valores]);
   /////
+  // console.log(urlimagen_2);
+  // console.log(file);
+  // console.log(nombreimagen);
+  // const preView = () => {
+  //   console.log("preview");
+  //   console.log(URL.createObjectURL(file[0]))
+    
+  // }
 
   return (
     <Contenedor>
@@ -377,8 +429,13 @@ const NuevaPropiedad = () => {
             /* margin: 5px 0; */
             font-weight: 600;
           }
-          input{margin:1rem 1rem 0 0; padding:5px;}
-          p{color:green;}
+          input {
+            margin: 1rem 1rem 0 0;
+            padding: 5px;
+          }
+          p {
+            color: green;
+          }
         `}
       >
         <label>Imagenes</label>
@@ -386,10 +443,19 @@ const NuevaPropiedad = () => {
           <input type="file" onChange={handleChange2} multiple />
           <input type="submit" value="Subir"></input>
         </form>
+        {/* {imagenCargada && <SortImage url={urlimagen_2} seturl={setURL}/>} */}
+
         {imagenCargada && <p>Imagenes cargadas con exito.</p>}
+        <SortImage url={preview_fotos} seturl={setPreview_fotos}/>
+        {/* {preview_fotos.map(e => (
+      <img key={e} src={e}></img>
+    ))} */}
+        
+
+        
         {/* <img src={url} alt="" /> */}
       </div>
-      
+
       <form onSubmit={handleSubmit} noValidate>
         {/* CARCTERISTICAS */}
         <div
@@ -408,9 +474,11 @@ const NuevaPropiedad = () => {
               // value={propiedad}
               onChange={handleChange}
               className="hijo"
-              defaultValue={'DEFAULT'}
+              defaultValue={"DEFAULT"}
             >
-              <option value="DEFAULT" disabled>Propiedad</option>
+              <option value="DEFAULT" disabled>
+                Propiedad
+              </option>
               <option value="Inmueble">Inmueble</option>
 
               <option value="Emprendimiento">Emprendimiento</option>
@@ -426,12 +494,14 @@ const NuevaPropiedad = () => {
               // value={tipo}
               onChange={handleChange}
               className="hijo"
-              defaultValue={'DEFAULT'}
+              defaultValue={"DEFAULT"}
             >
               {/* <option hidden selected>
                 Tipo de propiedad
               </option> */}
-              <option value="DEFAULT" disabled>Tipo de propiedad</option>
+              <option value="DEFAULT" disabled>
+                Tipo de propiedad
+              </option>
               <option value="Casa">Casa</option>
               <option value="Quinta">Casa quinta</option>
               <option value="Campo">Campo</option>
@@ -450,12 +520,14 @@ const NuevaPropiedad = () => {
               // value={operacion}
               onChange={handleChange}
               className="hijo"
-              defaultValue={'DEFAULT'}
+              defaultValue={"DEFAULT"}
             >
               {/* <option hidden selected>
                 Tipo de operación
               </option> */}
-              <option value="DEFAULT" disabled>Tipo de operación</option>
+              <option value="DEFAULT" disabled>
+                Tipo de operación
+              </option>
               <option value="Venta">Venta</option>
               <option value="Alquiler">Alquiler</option>
             </select>
@@ -509,9 +581,11 @@ const NuevaPropiedad = () => {
               // value={operacion}
               onChange={handleChange}
               className="hijo"
-              defaultValue={'DEFAULT'}
+              defaultValue={"DEFAULT"}
             >
-              <option value="DEFAULT" disabled>Moneda</option>
+              <option value="DEFAULT" disabled>
+                Moneda
+              </option>
               <option value="peso">Pesos ($)</option>
               <option value="dolar">Dolares (USD)</option>
             </select>
@@ -542,7 +616,10 @@ const NuevaPropiedad = () => {
               value={ubicacion}
               onChange={handleChange}
             /> */}
-            <InputAdress setCoordinates={setCoordinates} setUbicacion={setUbicacion} />
+            <InputAdress
+              setCoordinates={setCoordinates}
+              setUbicacion={setUbicacion}
+            />
             {/* {errores.ubicacion && <Error>{errores.ubicacion}</Error>} */}
           </Campo>
 
@@ -554,12 +631,14 @@ const NuevaPropiedad = () => {
               // value={destacado}
               onChange={handleChange}
               className="hijo"
-              defaultValue={'DEFAULT'}
+              defaultValue={"DEFAULT"}
             >
               {/* <option hidden selected>
                 Propiedad destacada
               </option> */}
-              <option value="DEFAULT" disabled>Propiedad destacada</option>
+              <option value="DEFAULT" disabled>
+                Propiedad destacada
+              </option>
               <option value="si">Si</option>
               <option value="no">No</option>
             </select>
@@ -615,7 +694,7 @@ const NuevaPropiedad = () => {
           <InputSubmit type="submit" value="Crear Propiedad" />
         </div>
       </form>
-      <NotificationContainer/>
+      <NotificationContainer />
     </Contenedor>
   );
 };

@@ -6,57 +6,75 @@ import Layout from "../components/Layout/Layout";
 import PanelDestacado from "../components/PanelDestacado";
 import Button from "../components/Layout/Button";
 import { FirebaseContext } from "../firebase";
-// import "slick-carousel/slick/_slick.css";
-// import "slick-carousel/slick/_slick-theme.css";
-// import {cargaContext} from '../components/FiltroContext'
+import { css } from "@emotion/react";
 
 const ContenedorImagen = styled.div`
   /* padding-top:10rem; */
   /* border: solid transparent; */
-  background-image: url("./header2_compr.jpg");
+  /* background-image: url("./header2_compr.jpg"); */
+  /* background-image: url("./fondo.png"); */
+  background-image: url("./IMG_9305_compr.JPG");
+  /* C:\Users\juanb\Desktop\Web develop\me-inmo-2\public\ */
+  /* background-image: url("./300b9d2b-8746-4d6d-bb61-4310b601ec6d.jpg"); */
+
   /* background-image: url("https://www.zillowstatic.com/s3/homepage/static/_Desktop_Overlay_ReadyChange_HC.jpg"); */
   /* background-position: center center; */
   background-size: cover;
+  background-position:center;
   /* z-index:-1; */
   min-height: 70rem;
   /* width:100%; */
+  .me_img{
+    display:flex;
+    margin:0 auto;
+    width: 150px;
+  }
   @media (min-width: 768px) {
     min-height: 75rem;
+    .me{
+    width: 1800px;
+  }
+  .me_img{
+    width: 180px;
+  }
   }
 `;
 
 const ContenedorInputs = styled.div`
+  /* display:none !important; */
   text-align: center;
   padding-top: 14rem;
-  max-width: 1200px;
+  max-width: 750px;
   width: 95%;
   margin: 0 auto;
   display: grid;
   row-gap: 0.5rem;
-
-  @media (min-width: 768px) {
-    /* justify-content: space-between; */
-    /* flex-wrap: wrap; */
-    grid-template-columns: 2fr 2fr 0.5fr;
-    column-gap:1rem;
-    padding-top: 10rem;
-    width:70%;
-  }
   select {
     padding: 0 1rem;
     border:none;
-    height: 58px;
+    height: 48px;
     text-align:center;
-    /* width: 35rem; */
-    /* padding: 2rem; */
-    /* margin:1rem; */
     border-radius:5px;
   }
-  *[class = "hijo"]{
-    /* flex-basis: calc(45% - 0rem); */
+  .primer-select{
+    border-radius:5px;
   }
-
-  
+  @media (min-width: 768px) {
+    grid-template-columns: 2fr 2fr 0.5fr;
+    column-gap:0rem;
+    padding-top: 20rem;
+    width:55%;
+    select{
+      border-radius:0px;
+      height: 58px;
+    }
+    .primer-select{
+    border-radius:5px 0 0 5px;
+  }
+  }
+  @media (min-width: 1500px) {
+    padding-top: 23rem;
+  }
 `;
 
 const Slogan = styled.h1`
@@ -67,11 +85,11 @@ const Slogan = styled.h1`
   font-size: 2.5rem;
   line-height: 40px;
   /* font-weight: 600; */
-  margin-top: 5rem;
+  margin-top: 4rem;
   text-align: center;
   @media (min-width: 768px) {
     max-width: 40%;
-    font-size: 3.5rem;
+    font-size: 3rem;
   }
 `;
 
@@ -145,11 +163,13 @@ export default function Home() {
     <>
       <Layout>
         <ContenedorImagen className="classPadding">
-          <Slogan>
-            Usted y nosotros, un seguro y sólido negocio inmobiliario.
-          </Slogan>
+          <div>
+          <img src="/me.png" className="me_img"></img>
+          
+          </div>
+          
           <ContenedorInputs>
-            <select name="operacion" className="hijo" id="operacion"   defaultValue={'DEFAULT'} onChange={handleChange}>
+            <select name="operacion" className="hijo primer-select" id="operacion"   defaultValue={'DEFAULT'} onChange={handleChange}>
             {/* <option hidden selected value="NA">Tipo de operación</option> */}
             <option value="DEFAULT" disabled>Tipo de operación</option>
               <option value="Venta">Venta</option>
@@ -176,6 +196,9 @@ export default function Home() {
 
             <Button className="hijo" filtro_home={filtros}></Button>
           </ContenedorInputs>
+          <Slogan>
+            Usted y nosotros, un seguro y sólido negocio inmobiliario.
+          </Slogan>
         </ContenedorImagen>
 
         {/* Inmuebles dest */}

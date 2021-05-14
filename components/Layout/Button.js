@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const ContenedorButton = styled.div`
   background-color: var(--rojo);
-  padding: 1rem 4rem;
+  padding: 0.5rem 4rem;
   border-radius: 5px;
   /* width: 100%;
     height: 65px; */
@@ -16,6 +16,10 @@ const ContenedorButton = styled.div`
       transform: scale(1.2);
     }
     cursor: pointer;
+  }
+  @media (min-width: 768px) {
+    padding: 1rem 4rem;
+    border-radius: 0px 5px 5px 0;
   }
 `;
 

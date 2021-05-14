@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import $ from "jquery";
 
 const Contenedor = styled.div`
-  top: 75%;
+  top: 80%;
   left: 85%;
   position: fixed;
   transition-duration: 0.5s;

@@ -54,7 +54,7 @@ const Logo = styled.div`
 `;
 
 const Header = () => {
-  const [url_logo, setUrl_logo] = useState("/logo0605_blanco.png");
+  const [url_logo, setUrl_logo] = useState("/logo_blanco.png");
 
   // Agrega fondo blanco a header cuando scrolleamos 
   useEffect(() => {
@@ -74,11 +74,11 @@ const Header = () => {
       if (scrollY > 200 || window.location.pathname != '/') {
         pageHeader.classList.add(fondoHeader);
         // pageHeader.addClass(fondoHeader);
-        setUrl_logo("/logo0605_negro2.png");
+        setUrl_logo("/untitleddesign_4_original.png");
       } else {
         pageHeader.classList.remove(fondoHeader);
         // pageHeader.removeClass(fondoHeader);
-        setUrl_logo("/logo0605_blanco.png");
+        setUrl_logo("/logo_blanco.png");
       }
     });
 
@@ -93,7 +93,8 @@ const Header = () => {
     const pageHeader = $(".page-header");
     const fondoHeader = "fondoHeader";
     if(window.location.pathname != '/'){
-      setUrl_logo("/logo0605_negro2.png");
+      // setUrl_logo("/logo0605_negro2.png");
+      setUrl_logo("/untitleddesign_4_original.png");
       // console.log("entro")
       // pageHeader.classList.add(fondoHeader);
       pageHeader.addClass(fondoHeader)

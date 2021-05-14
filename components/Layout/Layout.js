@@ -93,12 +93,12 @@ const Layout = (props) => {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
-        {/* <link rel="stylesheet" href="slick-carousel/slick/_slick.css"></link>
-        <link rel="stylesheet" href="slick-carousel/slick/_slick-theme.css"></link> */}
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
 
         {/* <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0-rU3vYLOIiSgtfbfVC_m4SqRigS9vyk&libraries=places"></script> */}
+        {/* <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script> */}
       </Head>
       <Header />
       <LogoWhatsapp />
