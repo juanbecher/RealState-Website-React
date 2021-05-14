@@ -164,7 +164,7 @@ export default function Home() {
       <Layout>
         <ContenedorImagen className="classPadding">
           <div>
-          <img src="/me.png" className="me_img"></img>
+          <img src="/ME.png" className="me_img"></img>
           
           </div>
           
