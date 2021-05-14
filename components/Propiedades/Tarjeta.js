@@ -88,6 +88,7 @@ const Caracteristicas = styled.div`
 const Tarjeta = (props) => {
   const {
     id,
+    propiedad,
     tipo,
     operacion,
     ambiente,
@@ -153,7 +154,12 @@ const Tarjeta = (props) => {
             )} */}
 
             <h4>
-              {tipoPropiedad(tipo)} en {operacion}
+              {propiedad == "Emprendimiento" ? 
+                "Emprendimiento"
+              :(`${tipoPropiedad(tipo)} en ${operacion}`
+                
+              )}
+              
             </h4>
             <p>{detalle_ubicacion[0]}</p>
           </div>

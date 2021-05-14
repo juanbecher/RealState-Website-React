@@ -140,7 +140,7 @@ const Propiedad = (props) => {
     telefono: "",
     descripcion: "",
   });
-
+  
   //Routing para obtener el id actual de la ruta
   const router = useRouter();
   const {
@@ -206,7 +206,7 @@ const Propiedad = (props) => {
     visible,
     moneda
   } = propiedad;
-
+  console.log(propiedad);
   if (ubicacion) {
     const detalle_ubicacion = ubicacion.split(",");
   }
@@ -361,7 +361,10 @@ const Propiedad = (props) => {
                   `}
                 >
                   <h3>
-                    {tipo} en {operacion}
+                    {propiedad.propiedad == "Emprendimiento" ? "Emprendimiento" 
+                    :
+                    (`${tipo} en ${operacion}`)}
+                    
                   </h3>
                   <h2>{getPrecio(precio, moneda)}</h2>
                   {/* {precio ? <h2>${numberWithCommas(precio)}</h2>
@@ -371,13 +374,16 @@ const Propiedad = (props) => {
                   <p>{ubicacion}</p>
                 </div>
                 <ul className="lista">
-                  <li>
+                  {m2 && (
+                    <li>
                     <img src="/blueprint3.png"></img>{" "}
                     <span>
                       {" "}
                       {m2}m<sup>2</sup>
                     </span>
                   </li>
+                  )}
+                  
                   {ambiente && (
                     <li>
                       <img src="/bed2.png"></img> <span> {ambiente}</span>
