@@ -66,9 +66,10 @@ const Layout = (props) => {
         `}
       />
       <Head>
-        <title>MonicaEmilio - Inmobiliaria - Santa Rosa</title>
+        <title>Monica Emilio - Inmobiliaria - Santa Rosa</title>
         <link rel="shortcut icon" type="image/jpg" href="/favicon-me.png" />
         <html lang="es"/>
+        <meta name="description" content="Inmobiliaria Mónica Emilio Bienes Raíces. Encontrá tu departamento, casa o propiedad ideal en la ciudad de Santa Rosa."/>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
