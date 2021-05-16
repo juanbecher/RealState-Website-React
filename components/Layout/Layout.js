@@ -66,7 +66,7 @@ const Layout = (props) => {
         `}
       />
       <Head>
-        <title>ME - Inmobiliaria</title>
+        <title>MonicaEmilio - Inmobiliaria - Santa Rosa</title>
         <link rel="shortcut icon" type="image/jpg" href="/favicon-me.png" />
         <html lang="es"/>
         <link
