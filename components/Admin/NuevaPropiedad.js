@@ -161,6 +161,7 @@ const STATE_INICIAL = {
   precio: "",
   destacado: "",
   moneda: "",
+  video: ""
 };
 
 const NuevaPropiedad = () => {
@@ -198,6 +199,7 @@ const NuevaPropiedad = () => {
     precio,
     destacado,
     moneda,
+    video
   } = valores;
   // console.log(valores);
 
@@ -235,6 +237,7 @@ const NuevaPropiedad = () => {
       destacado,
       visible,
       moneda,
+      video,
       creado: Date.now(),
     };
 
@@ -337,39 +340,45 @@ const NuevaPropiedad = () => {
   };
 
   function handleUpload(e) {
+    e.preventDefault();
     // console.log(file)
     // console.log(file[1].name)
-    e.preventDefault();
-    const fotosURL = [];
-    const fotosNombre = [];
-    for (let i = 0; i < file.length; i++) {
-      // console.log(file[i].nombre);
-
-      // const file_subir = file_backup.filter(
-      //   (imagen) => imagen.nombre == file[i].nombre
-      // );
-      const uploadTask = firebase.storage
-        .ref(`/propiedades/${file[i].nombre}`)
-        .put(file[i]);
-      uploadTask.on("state_changed", console.log, console.error, () => {
-        firebase.storage
-          .ref("propiedades")
-          .child(file[i].nombre)
-          .getDownloadURL()
-          .then((url) => {
-            console.log(file[i].nombre);
-            fotosURL.push({ nombre: file[i].nombre, url: url  });
-            // fotosURL.push(url);
-            fotosNombre.push(file[i].nombre);
-            // setURL(url);
-          }).then();
-      });
+    if (file.length == 0) {
+      return NotificationManager.error("Debe seleccionar una imagen.");
+    }else{
+      const fotosURL = [];
+      const fotosNombre = [];
+      for (let i = 0; i < file.length; i++) {
+        // console.log(file[i].nombre);
+  
+        // const file_subir = file_backup.filter(
+        //   (imagen) => imagen.nombre == file[i].nombre
+        // );
+        const uploadTask = firebase.storage
+          .ref(`/propiedades/${file[i].nombre}`)
+          .put(file[i]);
+        uploadTask.on("state_changed", console.log, console.error, () => {
+          firebase.storage
+            .ref("propiedades")
+            .child(file[i].nombre)
+            .getDownloadURL()
+            .then((url) => {
+              console.log(file[i].nombre);
+              fotosURL.push({ nombre: file[i].nombre, url: url  });
+              // fotosURL.push(url);
+              fotosNombre.push(file[i].nombre);
+              // setURL(url);
+            }).then();
+        });
+      }
+      // console.log(fotosURL);
+      setURL(fotosURL);
+      // console.log(fotosURL);
+      setNombreImagen(fotosNombre);
+      guardarImagenCargada(true);
     }
-    // console.log(fotosURL);
-    setURL(fotosURL);
-    // console.log(fotosURL);
-    setNombreImagen(fotosNombre);
-    guardarImagenCargada(true);
+    
+    
     
     // setFile(null);
     
@@ -457,6 +466,18 @@ const NuevaPropiedad = () => {
       </div>
 
       <form onSubmit={handleSubmit} noValidate>
+         {/* URL video*/}
+         <Campo>
+         <label htmlFor="video">Dirección URL video</label>
+            <input
+              type="text"
+              id="video"
+              placeholder="URL"
+              name="video"
+              value={video}
+              onChange={handleChange}
+            />
+          </Campo>
         {/* CARCTERISTICAS */}
         <div
           css={css`
@@ -467,7 +488,7 @@ const NuevaPropiedad = () => {
         >
           {/* TIPO Inmueble o empren */}
           <Campo>
-            <label htmlFor="email">Propiedad</label>
+            <label htmlFor="propiedad">Propiedad</label>
             <select
               name="propiedad"
               id="propiedad"

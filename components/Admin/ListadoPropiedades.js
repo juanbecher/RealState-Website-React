@@ -112,7 +112,8 @@ const ListadoPropiedades = () => {
       precio,
       ubicacion,
       descripcion,
-      moneda
+      moneda,
+      video
     } = params.data;
     const id = params.data.id;
     //  Actualizar en la BD
@@ -129,6 +130,7 @@ const ListadoPropiedades = () => {
       ubicacion: ubicacion,
       descripcion: descripcion,
       moneda:moneda,
+      video:video,
     }).then( () => 
     NotificationManager.warning('Registro actualizado'));
     // if (colId === 'country') {
@@ -355,6 +357,12 @@ const ListadoPropiedades = () => {
           ></AgGridColumn>
           <AgGridColumn
             field="urlimagen"
+            sortable={true}
+            filter={true}
+            editable={true}
+          ></AgGridColumn>
+          <AgGridColumn
+            field="video"
             sortable={true}
             filter={true}
             editable={true}
