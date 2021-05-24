@@ -23,7 +23,7 @@ const Mapa2 = (props) => {
       return (
         <div style={{ height: '100%', width: '100%' }}>
           <GoogleMapReact
-            bootstrapURLKeys={{ key: "AIzaSyA0-rU3vYLOIiSgtfbfVC_m4SqRigS9vyk" }}
+            bootstrapURLKeys={{ key: "yourkey" }}
             defaultCenter={center}
             defaultZoom={zoom}
             options={getMapOptions}
@@ -45,7 +45,7 @@ const Mapa2 = (props) => {
     return (
       <div style={{ height: '100%', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyA0-rU3vYLOIiSgtfbfVC_m4SqRigS9vyk" }}
+        bootstrapURLKeys={{ key: "yourkey" }}
         defaultCenter={center}
         defaultZoom={zoom}
         options={getMapOptions}

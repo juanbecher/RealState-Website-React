@@ -193,7 +193,7 @@ const AdminLayout = (props) => {
       <script
           async
           defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0-rU3vYLOIiSgtfbfVC_m4SqRigS9vyk&libraries=places"
+          src="https://maps.googleapis.com/maps/api/js?key=yourKey&libraries=places"
           type="text/javascript"
         ></script>
       </Head>
