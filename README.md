@@ -1,5 +1,18 @@
+<<<<<<< HEAD
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 test
+=======
+## Website for a Realstate company with Next.js and React JS, using SSR(Server Side Rendering) and Serverless technology.
+
+https://www.inmobiliariamonicaemilio.com
+
+![Image Dashboard](https://github.com/juanbecher/RealState-Website-React/blob/master/home.png)
+
+
+![Image Dashboard](https://github.com/juanbecher/RealState-Website-React/blob/master/propiedades.png)
+
+
+>>>>>>> 5723a122a810326120fa2fe7c4d60e3162cd9e93
 ## Getting Started
 
 First, run the development server:
