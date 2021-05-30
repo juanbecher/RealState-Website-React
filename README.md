@@ -9,7 +9,6 @@ https://www.inmobiliariamonicaemilio.com
 ![Image Dashboard](https://github.com/juanbecher/RealState-Website-React/blob/master/propiedades.png)
 
 
->>>>>>> 5723a122a810326120fa2fe7c4d60e3162cd9e93
 ## Getting Started
 
 First, run the development server:
