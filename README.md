@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-test
 =======
 ## Website for a Realstate company with Next.js and React JS, using SSR(Server Side Rendering) and Serverless technology.
 
