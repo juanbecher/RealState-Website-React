@@ -4,9 +4,7 @@ import Link from './ActiveLink';
 
 
 const Nav = styled.nav`
-    /* display:none; */
     z-index:2;
-    /* background-color: var(--rosa); */
     background-color: white;
     position: fixed;
     transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
@@ -25,9 +23,7 @@ const Nav = styled.nav`
         width:110px;
         display: block;
         padding: 0 10px;
-        /* color: var(--negro); */
         color: black;
-        /* font-size: 2.2rem; */
         text-align: center;
         line-height: 4;
         position: relative;
@@ -52,7 +48,6 @@ const Nav = styled.nav`
     }
     .active{
             color:var(--rojo);
-            /* border-bottom: 3px solid var(--rojo) */
             &:before{
             content: "";
             display:block;
@@ -93,9 +88,6 @@ const Navegacion = ({open}) => {
             <Link href="/nosotros" activeClassName="active">
               <a>Nosotros</a>
             </Link>
-            {/* <Link href="/tasaciones" activeClassName="active">
-              <a>Tasaciones</a>
-            </Link> */}
             <Link href="/sucursales" activeClassName="active">
               <a>Sucursales</a>
             </Link>

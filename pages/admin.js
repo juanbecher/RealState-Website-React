@@ -1,4 +1,4 @@
-import React, { useContext, useState,useEffect } from "react";
+import React from "react";
 import AdminLayout from "../components/Admin/AdminLayout";
 import ListadoPropiedades from "../components/Admin/ListadoPropiedades";
 

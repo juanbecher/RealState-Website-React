@@ -52,7 +52,6 @@ const Logo = styled.div`
   img{
       margin: 15px 0 15px 0rem ;
         max-width: 100%; 
-        /* height: 50px;  */
         display: block; 
         text-indent: -9999px;    
     }
@@ -118,11 +117,6 @@ const Footer = () => {
                 <a>Propiedades</a>
               </Link>
             </li>
-            {/* <li>
-              <Link href="/tasaciones" activeClassName="active">
-                <a>Tasaciones</a>
-              </Link>
-            </li> */}
             <li>
               <Link href="/sucursales" activeClassName="active">
                 <a>Sucursales</a>

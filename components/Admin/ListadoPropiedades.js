@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { FirebaseContext } from "../../firebase";
-import DetallePropiedad from "./DetallePropiedad";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import $ from "jquery";
@@ -98,7 +97,6 @@ const ListadoPropiedades = () => {
     console.log(params);
     var colId = params.column.getId();
 
-    // const nuevoValor = params.value;
 
     const {
       propiedad,
@@ -133,15 +131,6 @@ const ListadoPropiedades = () => {
       video:video,
     }).then( () => 
     NotificationManager.warning('Registro actualizado'));
-    // if (colId === 'country') {
-    //   var selectedCountry = params.data.country;
-    //   var selectedCity = params.data.city;
-    //   var allowedCities = countyToCityMap(selectedCountry);
-    //   var cityMismatch = allowedCities.indexOf(selectedCity) < 0;
-    //   if (cityMismatch) {
-    //     params.node.setDataValue('city', null);
-    //   }
-    // }
   };
 
   const ConfirmarEliminar = () => {
@@ -157,7 +146,6 @@ const ListadoPropiedades = () => {
               })
               .catch(function (error) {
                 console.log(error);
-                // Uh-oh, an error occurred!
               });
             })
             
@@ -176,14 +164,6 @@ const ListadoPropiedades = () => {
       console.log(selectedData);
       selectedData.map((node) => eliminarPropiedad(node.id, node.nombreimagen));
       NotificationManager.success('Propiedad eliminada')
-      // alert(`Propiedades eliminadas: ${selectedDataStringPresentation}`);
-      
-
-      // if (selectedData.length !== 0) {
-
-      // }else{
-      //   alert("Seleccione una propiedad.")
-      // }
     };
 
     const selectedNodes = gridApi.getSelectedNodes();
@@ -207,7 +187,6 @@ const ListadoPropiedades = () => {
       });
     } else {
       confirmAlert({
-        // title: 'Borrar propiedad',
         message: "Seleccione una propiedad",
         buttons: [
           {
@@ -221,12 +200,6 @@ const ListadoPropiedades = () => {
 
   return (
     <Contenedor>
-      {/* {propiedades.map(propiedad => (
-                <DetallePropiedad 
-                    key={propiedad.id}
-                    propiedad={propiedad}
-                />
-            ))} */}
             <ContHeader>
           <h3>Propiedades: {propiedades.length}</h3>
           <BotonEliminar onClick={ConfirmarEliminar} className="test">
@@ -235,9 +208,6 @@ const ListadoPropiedades = () => {
         </ContHeader>
       <div
         className="ag-theme-alpine"
-        css={css`
-          /* height: 500px; */
-        `}
       >
         
 

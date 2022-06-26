@@ -44,7 +44,6 @@ const ContenedorImagen = styled.div`
   height: 198px;
   max-width: 280px;
 `;
-// import { baseUrl } from "./config";
 const ImgCarousel = ({ urlimagen, id }) => {
   const settings = {
     dots: true,
@@ -57,17 +56,7 @@ const ImgCarousel = ({ urlimagen, id }) => {
   };
   return (
     <Arrows>
-      {/* <h2>Fade</h2> */}
       <Slider {...settings}>
-        {/* <div>
-        <img src="/images.png" alt="Logo"></img>
-        </div>
-        <div>
-        <img src="/images.png" alt="Logo"></img>
-        </div>
-        <div>
-        <img src="/images.png" alt="Logo"></img>
-        </div> */}
         {urlimagen.map((imagen) => (
           
             <ContenedorImagen>
@@ -77,11 +66,6 @@ const ImgCarousel = ({ urlimagen, id }) => {
               </a>
               </Link>
             </ContenedorImagen>
-          
-
-          //   <a target="_blank">
-          //   <img src={imagen} alt="Imagen"></img>
-          // </a>
         ))}
       </Slider>
     </Arrows>
@@ -89,9 +73,3 @@ const ImgCarousel = ({ urlimagen, id }) => {
 };
 
 export default ImgCarousel;
-
-// export default class Fade extends Component {
-//   render() {
-
-//   }
-// }

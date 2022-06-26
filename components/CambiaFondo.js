@@ -2,7 +2,6 @@ import React from 'react';
 
 const CambiaFondo = () => {
   const pageHeader = document.querySelector(".page-header");
-//   const animatedUl = pageHeader.querySelector(".secondary-menu");
   const fondoHeader = "fondoHeader";
   let targetScroll = window.innerHeight - pageHeader.offsetHeight;
 

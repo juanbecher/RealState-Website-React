@@ -17,8 +17,6 @@ import {
 } from "react-notifications";
 
 import { css } from "@emotion/react";
-// import SortableImage from "../SortableImages";
-// import { ReactSortable } from "react-sortablejs";
 import SortImage from '../SortImage';
 
 const Contenedor = styled.div`
@@ -28,7 +26,6 @@ const Contenedor = styled.div`
   h2 {
     color: #a63f5a;
     text-transform: uppercase;
-    /* text-align: center; */
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #d6d6d6;
@@ -59,9 +56,6 @@ const Contenedor = styled.div`
     margin: 2rem 0 0 0;
   }
 
-  input[type="file"] {
-    /* display: none; */
-  }
   .custom-file-upload {
     text-align: center;
     border-radius: 5px;
@@ -122,9 +116,6 @@ const Campo = styled.div`
   textarea {
     height: 400px;
   }
-  #ubicacion {
-    /* max-width: calc(50% - 3rem); */
-  }
 `;
 
 const InputSubmit = styled.input`
@@ -178,9 +169,6 @@ const NuevaPropiedad = () => {
     lat: null,
     lng: null,
   });
-  // console.log(file);
-  // console.log(file.indexOf);
-
   const { valores, errores, handleSubmit, handleChange } = useValidacion(
     STATE_INICIAL,
     validarNuevaPropiedad,
@@ -201,7 +189,6 @@ const NuevaPropiedad = () => {
     moneda,
     video
   } = valores;
-  // console.log(valores);
 
   // Context con las operaciones crud de firebase
   const { usuario, firebase } = useContext(FirebaseContext);
@@ -244,77 +231,11 @@ const NuevaPropiedad = () => {
     // insertando en DB
     console.log(detallePropiedad);
     firebase.db.collection("propiedades").add(detallePropiedad);
-    // .then(() =>
-    // NotificationManager.success('Propiedad creada'));
     return router
       .push("/admin")
       .then(() => NotificationManager.success("Propiedad creada"));
   }
-
-  // const handleUploadStart = () => {
-  //   guardarProgreso(0);
-  //   guardarSubiendo(true);
-
-  // };
-
-  // const handleProgress = (progreso) => guardarProgreso({ progreso });
-
-  // const handleUploadError = (error) => {
-  //   guardarSubiendo(error);
-  //   console.error(error);
-  // };
-
-  // function handleUploadSuccess(){
-  //   guardarProgreso(100);
-  //   guardarSubiendo(false);
-  //   // guardarNombre([...nombreimagen, nombre]);
-  //   // console.log("Nombre a buscar");
-  //   // console.log(nombre);
-  //   // const downURL = await firebase.storage
-  //   //   .ref("propiedades")
-  //   //   .child(nombre)
-  //   //   .getDownloadURL();
-
-  //   //   console.log({downURL});
-  //   // guardarUrlImagen([...urlimagen, {downURL}]);
-  //   // cargaURL(downURL);
-
-  //     // .then((url) => {
-  //     //     console.log({url});
-  //     //   guardarUrlImagen([...urlimagen, {url}]);
-  //     //   // console.log(urlimagen)
-  //     // });
-  //     // e.preventDefault();
-  //   const fotosURL = [];
-  //   for (let i = 0; i < file.length; i++) {
-  //     const uploadTask = firebase.storage.ref(`/propiedades/${file[i].name}`).put(file[i]);
-  //     uploadTask.on("state_changed", console.log, console.error, () => {
-
-  //         firebase.storage
-  //         .ref("propiedades")
-  //         .child(file[i].name)
-  //         .getDownloadURL()
-  //         .then((url) => {
-  //           fotosURL.push(url)
-  //           // setURL(url);
-  //         });
-
-  //     });
-  //   }
-  //   // console.log(fotosURL)
-  //   setURL(fotosURL)
-  //   setFile(null);
-  //   return(fotosURL)
-  //   console.log("Imagen cargads")
-  // };
-  ////
-
-  // console.log(file);
-
-  // console.log(urlimagen);
   function handleChange2(e) {
-    // console.log(e.target.files)
-    // setFile(e.target.files[0]);
     const fotos = [];
     const preview = [];
     for (let i = 0; i < e.target.files.length; i++) {
@@ -322,17 +243,14 @@ const NuevaPropiedad = () => {
         e.target.files[i].name
       }`;
       e.target.files[i].nombre = nombre;
-      // console.log(e.target.files[i]);
       fotos.push(e.target.files[i]);
       preview.push({nombre: nombre,preview: URL.createObjectURL(e.target.files[i])})
     }
     setFile(fotos);
     setPreview_fotos(preview);
-    // setFileBack(fotos);
   }
 
   const sorter = (a, b) => {
-    // myArray.map(function(e) { return e.hello; }).indexOf('stevie');
     return (
       preview_fotos.map((e) => e.nombre).indexOf(a.nombre) -
       preview_fotos.map((e) => e.nombre).indexOf(b.nombre)
@@ -341,19 +259,12 @@ const NuevaPropiedad = () => {
 
   function handleUpload(e) {
     e.preventDefault();
-    // console.log(file)
-    // console.log(file[1].name)
     if (file.length == 0) {
       return NotificationManager.error("Debe seleccionar una imagen.");
     }else{
       const fotosURL = [];
       const fotosNombre = [];
       for (let i = 0; i < file.length; i++) {
-        // console.log(file[i].nombre);
-  
-        // const file_subir = file_backup.filter(
-        //   (imagen) => imagen.nombre == file[i].nombre
-        // );
         const uploadTask = firebase.storage
           .ref(`/propiedades/${file[i].nombre}`)
           .put(file[i]);
@@ -365,47 +276,24 @@ const NuevaPropiedad = () => {
             .then((url) => {
               console.log(file[i].nombre);
               fotosURL.push({ nombre: file[i].nombre, url: url  });
-              // fotosURL.push(url);
               fotosNombre.push(file[i].nombre);
-              // setURL(url);
             }).then();
         });
       }
-      // console.log(fotosURL);
       setURL(fotosURL);
-      // console.log(fotosURL);
       setNombreImagen(fotosNombre);
       guardarImagenCargada(true);
     }
     
     
     
-    // setFile(null);
-    
-
-    // const uploadTask = firebase.storage.ref(`/propiedades/${file[i].name}`).put(file[i]);
-    // uploadTask.on("state_changed", console.log, console.error, () => {
-
-    //     firebase.storage
-    //     .ref("propiedades")
-    //     .child(file.name)
-    //     .getDownloadURL()
-    //     .then((url) => {
-    //       setFile(null);
-    //       setURL(url);
-    //     });
-
-    // });
   }
 
   useEffect(() => {
-    // const tipos = new Array("casa","casa-quinta","departamento")
     if (tipo == "Casa" || tipo == "Quinta" || tipo == "Departamento") {
-      // console.log("entro");
       $("#ambiente").prop("disabled", false);
       $("#banio").prop("disabled", false);
     } else {
-      // console.log("no entro");
       $("#ambiente").prop("disabled", true);
       $("#banio").prop("disabled", true);
     }
@@ -415,15 +303,6 @@ const NuevaPropiedad = () => {
       $("#tipo").prop("disabled", false);
     }
   }, [valores]);
-  /////
-  // console.log(urlimagen_2);
-  // console.log(file);
-  // console.log(nombreimagen);
-  // const preView = () => {
-  //   console.log("preview");
-  //   console.log(URL.createObjectURL(file[0]))
-    
-  // }
 
   return (
     <Contenedor>
@@ -433,9 +312,7 @@ const NuevaPropiedad = () => {
         css={css`
           margin: 2rem 0;
           label {
-            /* flex: 0 0 150px; */
             font-size: 1rem;
-            /* margin: 5px 0; */
             font-weight: 600;
           }
           input {
@@ -452,17 +329,9 @@ const NuevaPropiedad = () => {
           <input type="file" onChange={handleChange2} multiple />
           <input type="submit" value="Subir"></input>
         </form>
-        {/* {imagenCargada && <SortImage url={urlimagen_2} seturl={setURL}/>} */}
 
         {imagenCargada && <p>Imagenes cargadas con exito.</p>}
         <SortImage url={preview_fotos} seturl={setPreview_fotos}/>
-        {/* {preview_fotos.map(e => (
-      <img key={e} src={e}></img>
-    ))} */}
-        
-
-        
-        {/* <img src={url} alt="" /> */}
       </div>
 
       <form onSubmit={handleSubmit} noValidate>
@@ -492,7 +361,6 @@ const NuevaPropiedad = () => {
             <select
               name="propiedad"
               id="propiedad"
-              // value={propiedad}
               onChange={handleChange}
               className="hijo"
               defaultValue={"DEFAULT"}
@@ -512,14 +380,10 @@ const NuevaPropiedad = () => {
             <select
               name="tipo"
               id="tipo"
-              // value={tipo}
               onChange={handleChange}
               className="hijo"
               defaultValue={"DEFAULT"}
             >
-              {/* <option hidden selected>
-                Tipo de propiedad
-              </option> */}
               <option value="DEFAULT" disabled>
                 Tipo de propiedad
               </option>
@@ -538,14 +402,10 @@ const NuevaPropiedad = () => {
             <select
               name="operacion"
               id="operacion"
-              // value={operacion}
               onChange={handleChange}
               className="hijo"
               defaultValue={"DEFAULT"}
             >
-              {/* <option hidden selected>
-                Tipo de operación
-              </option> */}
               <option value="DEFAULT" disabled>
                 Tipo de operación
               </option>
@@ -623,25 +483,15 @@ const NuevaPropiedad = () => {
               value={precio}
               onChange={handleChange}
             />
-            {/* {errores.precio && <Error>{errores.precio}</Error>} */}
           </Campo>
           {/* UBICACION */}
           <Campo>
             <label htmlFor="banio">Ubicación</label>
 
-            {/* <input
-              type="text"
-              id="ubicacion"
-              placeholder="Ubicación"
-              name="ubicacion"
-              value={ubicacion}
-              onChange={handleChange}
-            /> */}
             <InputAdress
               setCoordinates={setCoordinates}
               setUbicacion={setUbicacion}
             />
-            {/* {errores.ubicacion && <Error>{errores.ubicacion}</Error>} */}
           </Campo>
 
           <Campo>
@@ -649,14 +499,10 @@ const NuevaPropiedad = () => {
             <select
               name="destacado"
               id="destacado"
-              // value={destacado}
               onChange={handleChange}
               className="hijo"
               defaultValue={"DEFAULT"}
             >
-              {/* <option hidden selected>
-                Propiedad destacada
-              </option> */}
               <option value="DEFAULT" disabled>
                 Propiedad destacada
               </option>
@@ -680,27 +526,6 @@ const NuevaPropiedad = () => {
         />
         {errores.descripcion && <Error>{errores.descripcion}</Error>}
 
-        {/* </fieldset> */}
-        {/* {errores.email && <Error>{errores.password}</Error> } */}
-
-        {/* IMGENES */}
-        {/* <Campo> */}
-        {/* <div
-            css={css`
-              border-radius: 5px;
-              display: flex;
-              border: 1px solid #c3c3c3;
-              width: 60%;
-              height: 150px;
-              margin: 1rem auto;
-              input{
-                display:none;
-              }
-            `}
-          >
-        
-          </div> */}
-        {/* </Campo> */}
 
         {error && <Error>{error} </Error>}
 
@@ -709,7 +534,6 @@ const NuevaPropiedad = () => {
           css={css`
             display: flex;
             flex-direction: row-reverse;
-            /* margin-top:3rem; */
           `}
         >
           <InputSubmit type="submit" value="Crear Propiedad" />

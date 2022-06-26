@@ -5,7 +5,6 @@ const Contenedor = styled.div`
 color:red;
     width: 40%;
     margin: 5rem auto;
-    /* border: 1px solid black; */
     box-shadow: 1px 1px 20px 0 rgb(0 0 0 / 10%);
     h2{
         text-align: center;

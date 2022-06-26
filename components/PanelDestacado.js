@@ -1,12 +1,8 @@
 import React,{useEffect, useState} from 'react';
-import Link from './Layout/ActiveLink';
 import styled from '@emotion/styled';
-import {css} from '@emotion/react';
 import Carousel from './Carousel/Carousel'
 
 const Contenedor = styled.div`
-  /* background-color: var(--gr) */
-  /* background-color: #F5F5F5; */
   background-color: ${props => props.empren ? 'var(--rojo)' : '#F5F5F5'};
   background-color: #FFF;
 

@@ -1,6 +1,3 @@
-import { jsx } from "@emotion/react";
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import styled from "@emotion/styled";
 import Layout from "../components/Layout/Layout";
 import { css } from "@emotion/react";
@@ -61,13 +58,10 @@ const Contenedor = styled.div`
 `;
 
 const Contacto = styled.div`
-  /* margin: 0 2rem; */
   padding: 1rem 2rem;
   margin-top:2rem;
-  /* border:1px solid black; */
   box-shadow: 1px 1px 20px 0 rgb(0 0 0 / 10%);
   height: 440px;
-  /* position: relative; */
 
   h4 {
     margin: 1rem 0;
@@ -107,7 +101,6 @@ const BotonEnviar = styled.input`
   text-align: center;
   width: 100px;
   margin: 10px auto;
-  /* margin-left: 92px; */
   padding: 10px;
   transition-duration: 0.5s;
   :hover {
@@ -131,12 +124,6 @@ const STATE_INICIAL = {
   descripcion: "",
 };
 export default function Sucursales() {
-  // const [mensaje, setMensaje] = useState({
-  //   nombre: "",
-  //   email: "",
-  //   telefono: "",
-  //   descripcion: "",
-  // });
   const [sucursal, setSucursal] = useState({
     coordinates: { lat: -36.62201474998877, lng: -64.29388345839136 },
     tipo: "Casa central",
@@ -176,13 +163,9 @@ export default function Sucursales() {
   }, [errores]);
 
   function enviarComentario() {
-    // e.preventDefault();
 
     Email.send({
-      // Host : "smtp.mailtrap.io",
-      // Username : "<Mailtrap username>",
-      // Password : "<Mailtrap password>",
-      SecureToken: "9614001f-601e-48e8-a34d-973c79399942",
+      SecureToken: process.env.EMAIL_TOKEN,
       To: "juanbecher1895@gmail.com",
       From: "joshblue731@gmail.com",
       Subject: `Consulta general`,
@@ -194,21 +177,9 @@ export default function Sucursales() {
       <strong>Teléfono: </strong> ${telefono} <br/>
       <strong>Comentario: </strong> ${descripcion} <br/>
       `,
-      // Body : `<html>
-      //   <div><p>Nombe y apellido: </p><strong>${mensaje.nombre}</strong></div>
-      //   <div><p>Email: </p><strong>${mensaje.email}</strong></div>
-      //   <div><p>Teléfono: </p><strong>${mensaje.telefono}</strong></div>
-      //   <div><p>Comentario: </p><strong>${mensaje.descripcion}</strong></div>
-      // </html>`
     }).then((message) => NotificationManager.success('Consulta enviada.'));
   }
 
-  // const handleChange = (e) => {
-  //   setMensaje({
-  //     ...mensaje,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
   return (
       <Layout>
         <div className="classPadding">

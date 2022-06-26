@@ -24,7 +24,6 @@ font-size:14px;
   
   .active {
     color: white;
-    /* border-bottom: 3px solid var(--rojo) */
     &:before {
       content: "";
       display: block;
@@ -42,7 +41,6 @@ font-size:14px;
     z-index: 3;
     height: 50px;
     background-color: #fff;
-    /* border-bottom: 3px solid #fff; */
   }
   .side-nav {
     position: fixed;
@@ -92,7 +90,6 @@ font-size:14px;
     margin-top: 0;
     padding: 0;
     padding-top: 44px;
-    /* height: 650px; */
     overflow: scroll;
   }
   /* set element styles to fit tablet and higher(desktop) */
@@ -169,11 +166,7 @@ font-size:14px;
 `;
 
 const Boton = styled.div`
-        /* margin-top: 5rem; */
-    /* width: 120px; */
-    /* height: 49px; */
     position: absolute;
-    /* background-color: #A63F5A; */
     padding: 8px 8px;
     border-radius: 25px;
     text-align: center;

@@ -1,13 +1,10 @@
 import React, { Fragment, useEffect, useState, useContext } from "react";
-import { jsx } from "@emotion/react";
-import styles from "../styles/Home.module.css";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import Layout from "../components/Layout/Layout";
 import { FirebaseContext } from "../firebase";
 import $ from "jquery";
 import LayoutPropiedades from "../components/Propiedades/LayoutPropiedades";
-// import FiltroContext from '../context/FiltroContext'
 
 const ContenedorFiltros = styled.div`
   position: fixed;
@@ -16,7 +13,6 @@ const ContenedorFiltros = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  /* padding-top: 5rem; */
   transition: transform 0.3s ease-in-out;
 
   background-color: white;
@@ -66,8 +62,6 @@ const Filtro = styled.div`
   .content {
     display: block;
     position: relative;
-    /* max-width: 300px;
-    min-width: 200px; */
     width: 100%;
     padding: 0 15px;
     display: none;
@@ -155,23 +149,15 @@ const Filtroplicado = styled.div`
     margin-right: 1rem;
     border-radius: 3px;
     padding: 5px 10px;
-    /* background-color: var(--gris3); */
     background-color: #eaeaea;
     :hover {
       cursor: pointer;
     }
   }
-  /* i{
-    background-image: url("./cancel.png");
-  } */
   .cancel {
-    /* display: inline-flex; */
     height: 12px;
     margin: auto 5px;
     margin-right: 3px;
-  }
-  .cancel::before {
-    /* content: url("./cancel.svg"); */
   }
 `;
 
@@ -199,8 +185,6 @@ const FiltroMobile = styled.div`
 `;
 
 export default function Propiedades() {
-  // const [filtroOperacion, guardarFiltroOperacion] = useState();
-  // const [filtros, guardarfiltros] = useState([]);
   const [filtroAmbiente, guardarFiltroAmbiente] = useState([]);
   const [filtroPrecio, guardarFiltroPrecio] = useState({ Desde: 0, Hasta: 0 });
   const [filtroMoneda, guardarFiltroMoneda] = useState("");
@@ -219,13 +203,11 @@ export default function Propiedades() {
   const [propiedades, GuardarPropiedades] = useState([]);
   const [propiedadesFiltro, GuardarPropiedadesFiltro] = useState([]);
 
-  //verifica filtros
+  //Check Filters
   const verificaFiltros = (prop) => {
     if (typeof filtroOperacion !== "undefined") {
-      // console.log("filtro operacion entro");
 
       if (!(prop.operacion == filtroOperacion)) {
-        // console.log("filtro operacion entro seg");
         return false;
       }
     }
@@ -259,7 +241,7 @@ export default function Propiedades() {
     return true;
   };
 
-  //EFFECT PARA TRAER PROPIEDADES
+  // effect get properties
   useEffect(() => {
     const obtenerPropiedades = () => {
       firebase.db
@@ -302,27 +284,11 @@ export default function Propiedades() {
 
   //EFFECT COLLAPSIBLE
   useEffect(() => {
-    // var coll = document.getElementsByClassName("collapsible");
-    // var i;
-    // for (i = 0; i < coll.length; i++) {
-    //   coll[i].addEventListener("click", function () {
-    //     $(".content").css( "display", "none" );
-    //     $(this).addClass("activa");
-    //     var content = this.nextElementSibling;
-    //     if (content.style.display === "block") {
-    //       content.style.display = "none";
-    //     } else {
-    //       content.style.display = "block";
-    //     }
-    //   });
-    // }
-
     var coll = document.getElementsByClassName("collapsible");
     var i;
 
     for (i = 0; i < coll.length; i++) {
       coll[i].addEventListener("click", function () {
-        // this.classList.toggle("activa_filtro");
         $(".collapsible").removeClass("activa_filtro");
         $(this).addClass("activa_filtro");
         var content = this.nextElementSibling;
@@ -349,7 +315,6 @@ export default function Propiedades() {
       }
     });
 
-    // && !$(e.target).is('.content')
 
     const agregaSahdow = () => {
       if (window.pageYOffset > 0) {
@@ -369,16 +334,12 @@ export default function Propiedades() {
   // EFFECT FILTROS
   useEffect(() => {
     var propConFiltro = propiedades.filter(verificaFiltros);
-    // var propConFiltro = propiedadesFiltro;
     if (ordenar == "Más recientes") {
-      // console.log("entro1");
       propConFiltro = propConFiltro.sort(
-        // (a, b) => parseInt(a.ambiente, 10) - parseInt(b.ambiente, 10)
         (a, b) => a.creado_date - b.creado_date
       );
     }
     if (ordenar == "Mayor precio") {
-      // console.log("entro2");
       propConFiltro = propConFiltro.sort(function (a, b) {
         a = parseInt(a.precio);
         b = parseInt(b.precio);
@@ -388,10 +349,8 @@ export default function Propiedades() {
           return b - a;
         }
       });
-      // (a, b) => parseInt(b.precio) - parseInt(a.precio)
     }
     if (ordenar == "Menor precio") {
-      // console.log("entro3");
       propConFiltro = propConFiltro.sort(function (a, b) {
         a = parseInt(a.precio);
         b = parseInt(b.precio);
@@ -417,13 +376,10 @@ export default function Propiedades() {
   const handleChange = (e) => {
     const id = e.target.id;
     const name = e.target.name;
-    // console.log(id);
-    // console.log(name);
     var checkboxValue = "";
 
     document.getElementById(id).addEventListener("change", (e) => {
       checkboxValue = e.target.checked ? "on" : "off";
-      // console.log(checkboxValue)
 
       if (checkboxValue == "on") {
         if (name == "tipo") {
@@ -467,10 +423,6 @@ export default function Propiedades() {
   const guardaMoneda = (e) => {
     guardarFiltroMoneda(e.target.value);
   };
-  // handle para ordenar
-  // const guardaOrdenar = (e) => {
-  //   guardarOrdenar(e.target.value);
-  // };
 
   // Remueve filtros
   const remueveFiltro = (e) => {
@@ -494,7 +446,6 @@ export default function Propiedades() {
 
     if (name == "precio") {
       guardarFiltroPrecio({ Desde: 0, Hasta: 0 });
-      // guardarFiltroMoneda("");
       $(`.moneda`).prop("checked", false);
       $(`#precio_D`).val("");
       $(`#precio_H`).val("");
@@ -541,9 +492,6 @@ export default function Propiedades() {
                     value="Venta"
                     onClick={guardaOperacion}
                   ></input>
-                  {/* <a id="Venta" name="Venta" value="Venta" onClick={guardaOperacion}>Venta</a> */}
-                  {/* <span htmlFor="Venta">Venta</span>
-                    </label> */}
                 </Box>
                 <Box>
                   <input
@@ -565,7 +513,6 @@ export default function Propiedades() {
               <div className="content">
                 <Box>
                   <label>
-                    {/* <input type='hidden' value="0" name='Casa' /> */}
                     <input
                       type="checkbox"
                       id="Casa"
@@ -646,7 +593,6 @@ export default function Propiedades() {
               <div className="content">
                 <Box>
                   <label>
-                    {/* <input type='hidden' value="0" name='Casa' /> */}
                     <input
                       type="checkbox"
                       id="1"
@@ -659,7 +605,6 @@ export default function Propiedades() {
                 </Box>
                 <Box>
                   <label>
-                    {/* <input type='hidden' value="0" name='Casa' /> */}
                     <input
                       type="checkbox"
                       id="2"
@@ -672,7 +617,6 @@ export default function Propiedades() {
                 </Box>
                 <Box>
                   <label>
-                    {/* <input type='hidden' value="0" name='Casa' /> */}
                     <input
                       type="checkbox"
                       id="3"
@@ -685,7 +629,6 @@ export default function Propiedades() {
                 </Box>
                 <Box>
                   <label>
-                    {/* <input type='hidden' value="0" name='Casa' /> */}
                     <input
                       type="checkbox"
                       id="4"
@@ -856,7 +799,6 @@ export default function Propiedades() {
             setOpen_ordenar={setOpen_ordenar}
           />
 
-          {/* <div className="preloader"></div> */}
         </div>
       </Layout>
     </>

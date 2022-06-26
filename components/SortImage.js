@@ -1,5 +1,4 @@
 import React, {Component,useState} from 'react';
-import {render} from 'react-dom';
 import styled from "@emotion/styled";
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import arrayMove from 'array-move';
@@ -20,8 +19,6 @@ const Contenedor = styled.div`
     img{
         margin: 1rem 0;
         margin-right:1rem;
-        /* width: 150px;
-        height: 150px; */
         object-fit:cover;
         object-position:center;
         box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
@@ -35,7 +32,6 @@ const SortableList = SortableContainer((url) => {
     console.log("sortable container");
     const url_show = url.items;
     console.log(url_show);
-    // console.log(url_show[0].value);
 
   return (
     <ul css={css`list-style:none;`}>
@@ -47,12 +43,8 @@ const SortableList = SortableContainer((url) => {
 });
 
 const SortImage = ({url,seturl}) => {
-    // const [items, setitems] = useState(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6'])
     const onSortEnd = ({oldIndex, newIndex}) => {
         seturl(arrayMove(url,oldIndex,newIndex))
-        // setitems(({items}) => ({
-        //   items: arrayMove(items, oldIndex, newIndex),
-        // }));
       };
       console.log(url)
     return ( 

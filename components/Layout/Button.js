@@ -6,8 +6,6 @@ const ContenedorButton = styled.div`
   background-color: var(--rojo);
   padding: 0.5rem 4rem;
   border-radius: 5px;
-  /* width: 100%;
-    height: 65px; */
   img {
     transition-duration: 0.5s;
   }

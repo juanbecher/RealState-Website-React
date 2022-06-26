@@ -8,17 +8,10 @@ const Contenedor = styled.div`
     display: inline-block;
     padding: 0;
     margin: 20px 0;
-    /* border-radius: 12px; */
-    /* :first-child{
-        background-color: red;
-    } */
   }
   li {
     display: inline;
     cursor: pointer;
-    /* :first-child a {
-      background-color: #eaeaea;
-    } */
   }
   a {
     margin: 0 7px;

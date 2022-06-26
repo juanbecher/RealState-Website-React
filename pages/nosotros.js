@@ -43,7 +43,6 @@ div{
 `;
 
 const Valor = styled.div`
-  /* background-color:gray; */
   padding: 7rem 0;
   transition-duration: .1s;
   h2{

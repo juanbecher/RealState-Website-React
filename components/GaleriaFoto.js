@@ -3,16 +3,11 @@ import "photoswipe/dist/photoswipe.css";
 import "photoswipe/dist/default-skin/default-skin.css";
 import PhotoswipeUIDefault from 'photoswipe/dist/photoswipe-ui-default';
 import styled from '@emotion/styled';
-
-// import { Gallery, Item } from "react-photoswipe-gallery";
 import { CustomGallery, Item, DefaultLayout } from 'react-photoswipe-gallery'
 
 const Contenedor = styled.div`
 display:flex;
-  /* height: 500px; */
-  /* max-height: 500px; */
   width:1000px; 
-  /* flex-wrap:wrap; */
   justify-content:space-between;
   .imagen{
     flex-basis: calc(50%)
@@ -27,28 +22,6 @@ const GaleriaFoto = () => {
     }
   return (
     
-    //     <Gallery>
-    //     <Item
-    //       original="https://placekitten.com/400/400?image=1"
-    //     //   thumbnail="https://placekitten.com/80/60?image=1"
-    //       width="800"
-    //       height="600"
-    //     >
-    //       {({ ref, open }) => (
-    //         <img ref={ref} onClick={open} src="/dpto.jpg" />
-    //       )}
-    //     </Item>
-    //     <Item
-    //       original="https://placekitten.com/1024/768?image=2"
-    //     //   thumbnail="https://placekitten.com/80/60?image=2"
-    //       width="800"
-    //       height="600"
-    //     >
-    //       {({ ref, open }) => (
-    //         <img ref={ref} onClick={open} src="/dpto1.jpg" />
-    //       )}
-    //     </Item>
-    //   </Gallery>
     <>
     <CustomGallery layoutRef={layoutRef} ui={PhotoswipeUIDefault} options={options}>
         <Item

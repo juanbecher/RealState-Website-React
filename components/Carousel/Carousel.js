@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "react-slick";
 import styled from '@emotion/styled';
 import Tarjeta from '../Propiedades/Tarjeta'
@@ -67,9 +67,6 @@ const Carousel = (props) => {
       }
     ],
     afterChange: function(index) {
-      // console.log(
-      //   `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-      // );
     }
   };
   const propiedades = props.propiedades;
@@ -85,8 +82,6 @@ const Carousel = (props) => {
             
           ))}
       
-      
-        
       </Slider>
     </ContenedorCarousel>
   );
